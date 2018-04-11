@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Header from './components/Header.jsx';
+import SongList from './components/SongList.jsx';
 import Loading from './components/Loading.jsx';
 import styles from '../src/styles.scss';
-// const pg = require('pg');
 
 class App extends React.Component {
   constructor(props) {
@@ -51,7 +50,7 @@ class App extends React.Component {
         <div className="wrapper" />
 
         {this.state.gotCreatedSong === false ? <Loading /> : null}
-        <Header
+        <SongList
           upVote={this.upVote}
           downVote={this.downVote}
           data={this.state}
