@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import $ from 'jquery';
 import Header from './components/Header.jsx';
 import Loading from './components/Loading.jsx';
 import styles from '../src/styles.scss';
@@ -11,35 +12,9 @@ class App extends React.Component {
     super(props);
     this.state = {
       gotCreatedSong: true,
-      array: [
-        0,
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12,
-        13,
-        14,
-        15,
-        16,
-        17,
-        18,
-        19,
-        20,
-        21,
-        22,
-        23,
-        24
-      ],
-      upVotes: 0,
-      downVotes: 0
+      array: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+      upVoteCount: 0,
+      downVoteCount: 0,
     };
     this.makeMagic = this.makeMagic.bind(this);
     this.upVote = this.upVote.bind(this);
@@ -47,9 +22,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // $.get('/', function() {
-    //   pg.fetch()
-    //   this.setState({array: data})
+    axios.get('/home')
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log(error);
+    });
+    // $.get('/name', function(data) {
+    //   console.log(data);
     // })
   }
 
@@ -61,6 +42,7 @@ class App extends React.Component {
   }
 
   upVote() {
+    //this.setState({upVoteCount: +1})
     console.log('UpVote');
   }
 

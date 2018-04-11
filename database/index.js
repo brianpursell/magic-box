@@ -10,7 +10,7 @@ const client = new pg.Client({
 client
   .connect()
   .then(() => {
-    log.info(
+    console.log(
       `Connected To ${client.database} at ${client.host}:${client.port}`
     );
   })
@@ -31,13 +31,30 @@ const query = {
 };
 
 //example test db function
-client
-  .query('SELECT NOW() as now')
-  .then(data => {
-    console.log('This is our response Data => ', data);
-  })
-  .catch(err => {
-    console.error(err);
-  });
+// client
+//   .query('SELECT NOW() as now')
+//   .then(data => {
+//     console.log('This is our response Data => ', data);
+//   })
+//   .catch(err => {
+//     console.error(err);
+//   });
 
+
+// get for homepage
+function load(callback) {
+  client
+    .query('SELECT * FROM songs')
+    .then(data => {
+      callback(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+}
+// load()
+
+
+module.exports.load = load;
+module.exports.client = client;
 // module.exports.selectAll = selectAll;
