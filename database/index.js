@@ -52,9 +52,7 @@ function load(callback) {
       console.error(err);
     });
 }
-// load()
-
 
 module.exports.load = load;
 module.exports.client = client;
-// module.exports.selectAll = selectAll;
+

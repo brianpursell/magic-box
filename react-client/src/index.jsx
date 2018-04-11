@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import $ from 'jquery';
 import Header from './components/Header.jsx';
 import Loading from './components/Loading.jsx';
 import styles from '../src/styles.scss';
@@ -29,20 +28,13 @@ class App extends React.Component {
     .catch(function(error) {
       console.log(error);
     });
-    // $.get('/name', function(data) {
-    //   console.log(data);
-    // })
   }
 
   makeMagic() {
     this.setState({ gotCreatedSong: false });
-    // $.post('/MAKESHIT', function(){
-    //   this.setState({gotCreatedSong: true})
-    // })
   }
 
   upVote() {
-    //this.setState({upVoteCount: +1})
     console.log('UpVote');
   }
 
