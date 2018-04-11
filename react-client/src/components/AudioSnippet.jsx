@@ -4,12 +4,17 @@ import styles from '../styles.scss';
 const AudioSnippet = props => (
     <div>
         <p className={props.className}>
-            <div className="songName">Name</div>
+            <div className="songName">{props.song.title}</div>
+            
             <div className="Votes">
-            <img className="UpVoteArrow" src="https://i.imgur.com/8yJfihe.png" onClick={props.upVote}/>{props.upVoteCount}
-            <img className="DownVoteArrow" src="https://i.imgur.com/ZA2BSbi.png" onClick={props.downVote} />{props.downVoteCount}
+            <img className="UpVoteArrow" src="https://i.imgur.com/8yJfihe.png" onClick={props.upVote}/>{props.song.upvotes}
+            <img className="DownVoteArrow" src="https://i.imgur.com/ZA2BSbi.png" onClick={props.downVote} />{props.song.downvotes}
             </div>
-            <audio controls className="AudioPlayer" />
+            <div className="artist">{props.song.artist}</div>
+            
+            <audio controls className={"AudioPlayer"}>
+                <source src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${props.song.url}.mp3`} type="video/mp4"/>>
+            </audio>
         </p>
     </div>
 )

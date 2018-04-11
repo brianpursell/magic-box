@@ -4,8 +4,8 @@ import AudioSnippet from './AudioSnippet.jsx';
 
 const SongList = props => (
     <div>
-      {props.data.array.map((song, index) => {
-        if (index === props.data.array.length - 1) {
+      {props.data.songsArray.map((song, index) => {
+        if (index === props.data.songsArray.length - 1) {
           return <AudioSnippet 
             className={"LastPlayer"}
             key={index} 
