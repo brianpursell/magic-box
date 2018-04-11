@@ -1,17 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import Header from './components/Header.jsx';
+import SongList from './components/SongList.jsx';
 import Loading from './components/Loading.jsx';
 import styles from '../src/styles.scss';
-// const pg = require('pg');
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       gotCreatedSong: true,
-      array: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24],
+      songsArray: [],
       upVoteCount: 0,
       downVoteCount: 0,
     };
@@ -21,9 +20,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    let thisHolder = this;
     axios.get('/home')
     .then(function(response) {
-      console.log(response);
+      console.log(response.data.rows);
+      thisHolder.setState({songsArray: response.data.rows})
     })
     .catch(function(error) {
       console.log(error);
@@ -45,13 +46,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={this.makeMagic} className="MagicButton">
-          Make Magic{' '}
-        </button>
+        <button onClick={this.makeMagic} className="MagicButton">Make Magic</button>
         <div className="wrapper" />
 
         {this.state.gotCreatedSong === false ? <Loading /> : null}
-        <Header
+        <SongList
           upVote={this.upVote}
           downVote={this.downVote}
           data={this.state}
