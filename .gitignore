@@ -1,0 +1,5 @@
+node_modules/
+webpack.config.js
+.env
+/Users/joshuabrigati/magic-box/react-client/dist/bundle.js
+package-lock.json
