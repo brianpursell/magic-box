@@ -1,5 +1,5 @@
 import React from 'react';
-// import styles from '../styles.scss';
+import styles from '../styles.scss';
 
 const Header = props => (
   console.log(props.data.array.length),
@@ -10,16 +10,42 @@ const Header = props => (
           return (
             <p className="LastPlayer">
               <div className="songName">Name</div>
+              <div className="Votes">
+                <img
+                  className="UpVoteArrow"
+                  src="https://i.imgur.com/8yJfihe.png"
+                  onClick={props.upVote}
+                />{' '}
+                0{' '}
+                <img
+                  className="DownVoteArrow"
+                  src="https://i.imgur.com/ZA2BSbi.png"
+                  onClick={props.downVote}
+                />360
+              </div>
+
               <audio controls className="AudioPlayer" />
-              {/* <a className="playButton">Play</a> */}
             </p>
           );
         } else {
           return (
             <p className="player">
               <div className="songName">Name</div>
+              <div className="Votes">
+                <img
+                  className="UpVoteArrow"
+                  src="https://i.imgur.com/8yJfihe.png"
+                  onClick={props.upVote}
+                />{' '}
+                0{' '}
+                <img
+                  className="DownVoteArrow"
+                  src="https://i.imgur.com/ZA2BSbi.png"
+                  onClick={props.downVote}
+                />360
+              </div>
+
               <audio controls className="AudioPlayer" />
-              {/* <a className="playButton">Play</a>*/}
             </p>
           );
         }

@@ -1,65 +1,226 @@
+// body {
+//     background-color: #42C6FF;
+//     background-image: linear-gradient(135deg, #42C6FF 0%, #FF0081 74%);
+//   }
+//   // .sidenav {
+//   //     height: 100%;
+//   //     width: 150px;
+//   //     position: fixed;
+//   //     z-index: 1;
+//   //     top: 0;
+//   //     left: 0;
+//   //     background-color: grey;
+
+//   // }
+
+//   // .sidenav a {
+//   //   padding: 20px 20px 20px 40px;
+//   //   text-decoration: none;
+//   //   font-size: 25px;
+//   //   color: #42C6FF;
+//   //   display: block;
+//   // }
+
+//   // .sidenav a:hover {
+//   //   color: #f1f1f1;
+//   // }
+
+//   .MagicButton {
+//     margin-top: 100px;
+//     margin-left: 25%;
+//     height: 50px;
+//     width: 10%;
+//     box-shadow: 0 3px rgba(4, 23, 27, 0.438);
+//     outline: none;
+//     color: white;
+//     text-align: center;
+//     border-radius: 15px;
+//     background: linear-gradient(-45deg, #FF0081, #B621FE, #1FD1F9, #F4D63F);
+//     background-size: 400% 400%;
+//     animation: Gradient 5s ease infinite;
+//   }
+//   .player {
+//     height: 100px;
+//     width: 1000px;
+//     position: relative;
+//     top: 50px;
+//     left: 15%;
+//     background-color: #42C6FF;
+//   }
+//   .LastPlayer {
+//     height: 100px;
+//     width: 1000px;
+//     position: relative;
+//     top: 50px;
+//     margin-bottom: 100%;
+//     left: 15%;
+//     background-color: #42C6FF;
+//   }
+//   .songName {
+//     color: white;
+//     margin-top: 2%;
+//     margin-left: 10%;
+//   }
+//   .AudioPlayer {
+//     top: 35%;
+//     left: 10%;
+//     position: absolute;
+//     color:#42C6FF;
+//   }
 body {
-  background-color: #42C6FF;
-  background-image: linear-gradient(135deg, #42C6FF 0%, #FF0081 74%);
+  background-color: #42c6ff;
+  background-image: linear-gradient(135deg, #42c6ff 0%, #ff0081 74%);
 }
-// .sidenav {
-//     height: 100%;
-//     width: 150px;
-//     position: fixed;
-//     z-index: 1;
-//     top: 0;
-//     left: 0;
-//     background-color: grey;
-   
-// }
-
-// .sidenav a {
-//   padding: 20px 20px 20px 40px;
-//   text-decoration: none;
-//   font-size: 25px;
-//   color: #42C6FF;
-//   display: block;
-// }
-
-// .sidenav a:hover {
-//   color: #f1f1f1;
-// }
 
 .MagicButton {
-  height: 30px;
-  width: 100px;
   margin-top: 100px;
-  left: 15%;
-  position: relative;
-
-  background-color: #807FEE;
-  text-align: center;
-}
-.player {
-  height: 100px;
-  width: 1000px;
-  position: relative;
-  top: 50px;
-  left: 15%;
-  background-color: #42C6FF;
-}
-.LastPlayer {
-  height: 100px;
-  width: 1000px;
-  position: relative;
-  top: 50px;
-  margin-bottom: 100%;
-  left: 15%;
-  background-color: #42C6FF;
-}
-.songName {
+  margin-left: 25%;
+  height: 50px;
+  width: 10%;
+  box-shadow: 0 3px rgba(4, 23, 27, 0.438);
+  outline: none;
   color: white;
-  margin-top: 2%;
-  margin-left: 10%;
+  text-align: center;
+  border-radius: 15px;
+  background: linear-gradient(-45deg, #ff0081, #b621fe, #1fd1f9, #f4d63f);
+  background-size: 400% 400%;
+  animation: Gradient 5s ease infinite;
 }
-.AudioPlayer {
-  top: 35%;
-  left: 10%;
+
+.wrapper {
   position: absolute;
-  color:#42C6FF;
+  top: 115px;
+  left: 38%;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  width: 1px;
+  height: 20px;
+}
+
+.el {
+  position: absolute;
+  opacity: 1;
+  width: 2px;
+  height: 20px;
+  transform-origin: 50% 100%;
+  background: white;
+}
+
+@keyframes Gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.MagicButton:active {
+  box-shadow: 0 3px #666;
+  transform: translateY(1px);
+}
+
+.player {
+  height: 125px;
+  width: 50%;
+  position: relative;
+  top: 30px;
+  left: 25%;
+  background-color: #42c6ff;
+  box-shadow: 0 3px rgba(4, 23, 27, 0.438);
+  border-radius: 15px;
+}
+.player .songName {
+  color: white;
+  font-size: 25px;
+  padding-top: 1%;
+  padding-left: 2%;
+}
+.player .AudioPlayer {
+  top: 35%;
+  left: 35%;
+  position: absolute;
+  color: #42c6ff;
+}
+.player .UpVotes {
+  color: white;
+}
+.player .DownVotes {
+  color: white;
+}
+.player .Votes {
+  font-size: 20px;
+  color: white;
+  padding-top: 5%;
+  padding-left: 1%;
+}
+.player .UpVoteArrow {
+  height: 3%;
+  width: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.player .UpVoteArrow:active {
+  transform: translateY(1.5px);
+}
+.player .DownVoteArrow {
+  height: 3%;
+  width: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.player .DownVoteArrow:active {
+  transform: translateY(1.5px);
+}
+
+.LastPlayer {
+  height: 125px;
+  width: 50%;
+  position: relative;
+  top: 30px;
+  margin-bottom: 100%;
+  left: 25%;
+  background-color: #42c6ff;
+  box-shadow: 0 3px rgba(4, 23, 27, 0.438);
+  border-radius: 15px;
+}
+.LastPlayer .songName {
+  color: white;
+  font-size: 25px;
+  padding-top: 1%;
+  padding-left: 2%;
+}
+.LastPlayer .AudioPlayer {
+  top: 35%;
+  left: 35%;
+  position: absolute;
+  color: #42c6ff;
+}
+.LastPlayer .Votes {
+  font-size: 20px;
+  color: white;
+  padding-top: 5%;
+  padding-left: 1%;
+}
+.LastPlayer .UpVoteArrow {
+  height: 3%;
+  width: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.LastPlayer .UpVoteArrow:active {
+  transform: translateY(1px);
+}
+.LastPlayer .DownVoteArrow {
+  height: 3%;
+  width: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.LastPlayer .DownVoteArrow:active {
+  transform: translateY(1px);
 }
