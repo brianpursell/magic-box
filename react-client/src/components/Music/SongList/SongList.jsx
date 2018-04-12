@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from '../styles.scss';
-import AudioSnippet from './AudioSnippet.jsx';
+import styles from '../../../styles.scss';
+import AudioSnippet from '../AudioSnippet/AudioSnippet.jsx';
 
 const SongList = props => (
     <div>

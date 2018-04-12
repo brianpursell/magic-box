@@ -1,6 +1,6 @@
 import React from 'react';
 import anime from 'animejs';
-import styles from '../styles.scss';
+import styles from '../../styles.scss';
 
 const Header = props => {
   console.log('called');

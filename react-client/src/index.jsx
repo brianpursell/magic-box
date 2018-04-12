@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import SongList from './components/SongList.jsx';
-import Loading from './components/Loading.jsx';
-import styles from '../src/styles.scss';
+import SongList from './components/Music/SongList/SongList.jsx';
+import Loading from './components/Common/Loading.jsx';
+import styles from './styles.scss';
 
 class App extends React.Component {
   constructor(props) {
