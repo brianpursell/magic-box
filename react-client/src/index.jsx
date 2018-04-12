@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import SongList from './components/SongList.jsx';
-import Loading from './components/Loading.jsx';
-import styles from '../src/styles.scss';
+import SongList from './components/SongList';
+import Loading from './components/Loading';
+// import styles from '../src/styles.scss';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       gotCreatedSong: true,
-      songsArray: [],
-      upVoteCount: 0,
-      downVoteCount: 0,
+      songsArray: [1],
+      // upVoteCount: 0,
+      // downVoteCount: 0,
     };
     this.makeMagic = this.makeMagic.bind(this);
     this.upVote = this.upVote.bind(this);
@@ -20,15 +20,14 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let thisHolder = this;
+    const thisHolder = this;
     axios.get('/home')
-    .then(function(response) {
-      console.log(response.data.rows);
-      thisHolder.setState({songsArray: response.data.rows})
-    })
-    .catch(function(error) {
-      console.log(error);
-    });
+      .then((response) => {
+        thisHolder.setState({ songsArray: response.data.rows });
+      })
+      .catch((error) => {
+        throw (error);
+      });
   }
 
   makeMagic() {
@@ -36,11 +35,11 @@ class App extends React.Component {
   }
 
   upVote() {
-    console.log('UpVote');
+    console.log(this, 'UpVote');
   }
 
   downVote() {
-    console.log('DownVote');
+    console.log(this, 'DownVote');
   }
 
   render() {
@@ -51,9 +50,9 @@ class App extends React.Component {
 
         {this.state.gotCreatedSong === false ? <Loading /> : null}
         <SongList
-          upVote={this.upVote}
-          downVote={this.downVote}
-          data={this.state}
+          // upVote={this.upVote}
+          // downVote={this.downVote}
+          songsArray={this.state.songsArray}
         />
       </div>
     );
