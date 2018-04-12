@@ -1,6 +1,8 @@
 import React from 'react';
 import anime from 'animejs';
-import styles from '../styles.scss';
+import '../styles.scss';
+
+// Got from https://codepen.io/juliangarnier/pen/rGjMyW, just changed CSS styles, duration and numberOfEls
 
 const Header = props => {
   console.log('called');

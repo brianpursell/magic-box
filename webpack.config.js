@@ -4,6 +4,9 @@ const SRC_DIR = path.join(__dirname, '/react-client/src');
 const DIST_DIR = path.join(__dirname, '/react-client/dist');
 
 module.exports = {
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: 'bundle.js',

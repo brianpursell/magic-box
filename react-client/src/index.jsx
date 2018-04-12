@@ -11,8 +11,8 @@ class App extends React.Component {
     this.state = {
       gotCreatedSong: true,
       songsArray: [1],
-      // upVoteCount: 0,
-      // downVoteCount: 0,
+      upVoteCount: 0,
+      downVoteCount: 0,
     };
     this.makeMagic = this.makeMagic.bind(this);
     this.upVote = this.upVote.bind(this);
@@ -23,7 +23,11 @@ class App extends React.Component {
     const thisHolder = this;
     axios.get('/home')
       .then((response) => {
-        thisHolder.setState({ songsArray: response.data.rows });
+        thisHolder.setState({
+          songsArray: response.data.rows,
+          upVoteCount: response.data.upvotes,
+          downVoteCount: response.data.downvotes,
+        });
       })
       .catch((error) => {
         throw (error);
@@ -50,9 +54,11 @@ class App extends React.Component {
 
         {this.state.gotCreatedSong === false ? <Loading /> : null}
         <SongList
-          // upVote={this.upVote}
-          // downVote={this.downVote}
+          upVoteCount={this.state.upVoteCount}
+          downVoteCount={this.state.downVoteCount}
           songsArray={this.state.songsArray}
+          upVote={this.upVote}
+          downVote={this.downVote}
         />
       </div>
     );
