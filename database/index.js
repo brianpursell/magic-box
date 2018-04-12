@@ -39,7 +39,6 @@ module.exports = {
 //     console.error(err);
 //   });
 
-
 // get for homepage
 function load(callback) {
   client
@@ -54,4 +53,3 @@ function load(callback) {
 
 module.exports.load = load;
 module.exports.client = client;
-
