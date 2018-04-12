@@ -1,1 +1,1 @@
-This is our app description.
+This is our time capsule.
