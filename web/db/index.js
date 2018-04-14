@@ -1,14 +1,15 @@
 const pg = require('pg');
 const log = require('node-logger');
-//Need to add local connection details
+// Need to add local connection details
 const bodyParser = require('body-parser');
+
 const client = new pg.Client();
 client
   .connect()
   .then(() => {
     console.log(`Connected To ${client.database} at ${client.host}:${client.port}`);
   })
-  .catch((err) => console.error(err));
+  .catch(err => console.error(err));
 
 module.exports = {
   query: (text, params, callback) => {
