@@ -1,11 +1,6 @@
 import React from 'react';
-<<<<<<< HEAD:web/src/components/Music/SongList/SongList.jsx
-import styles from '../../../styles.scss';
+import '../../../styles.scss';
 import AudioSnippet from '../AudioSnippet/AudioSnippet.jsx';
-=======
-import '../styles.scss';
-import AudioSnippet from './AudioSnippet';
->>>>>>> 85d02270ef040cc66877516b795cede724c7ce96:react-client/src/components/SongList.jsx
 
 const SongList = props => (
   // console.log(props),

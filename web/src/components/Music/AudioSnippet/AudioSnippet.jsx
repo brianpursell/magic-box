@@ -1,9 +1,5 @@
 import React from 'react';
-<<<<<<< HEAD:web/src/components/Music/AudioSnippet/AudioSnippet.jsx
-import styles from '../../../styles.scss';
-=======
-import '../styles.scss';
->>>>>>> 85d02270ef040cc66877516b795cede724c7ce96:react-client/src/components/AudioSnippet.jsx
+import '../../../styles.scss';
 
 const AudioSnippet = props => (
   <div>
