@@ -10,17 +10,27 @@ const app = express();
 app.use(express.static(__dirname + '/dist'));
 
 app.get('/home', (req, res) => {
-  console.log('called');
-  db.load((data) => {
-    res.send(data);
+  db.load(data => {
+    res.send(data.rows);
   });
 });
 
-app.get('*', function(req, res){
-  res.send('what???', 404);
+app.get('/users', (req, res) => {
+  db.users(data => {
+    res.send(data.rows);
+  });
 });
 
+app.post('/signup', (req, res) => {
+  console.log(req.body);
+  db.signup(req.body, response => {
+    res.send(req.body);
+  });
+});
 
+app.get('*', function(req, res) {
+  res.send('what???', 404);
+});
 
 var port = process.env.PORT || 8080;
 app.listen(port, function() {
