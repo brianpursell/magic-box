@@ -3,7 +3,7 @@ import '../../../styles.scss';
 
 const AudioSnippet = props => (
   <div>
-    <p className={props.className}>
+    <div className={props.className}>
       <div className="songName">{props.song.title}</div>
 
       <div className="Votes">
@@ -15,7 +15,7 @@ const AudioSnippet = props => (
       <audio controls className="AudioPlayer">
         <source src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${props.song.url}.mp3`} type="video/mp4"/>>
       </audio>
-    </p>
+    </div>
   </div>
 );
 
