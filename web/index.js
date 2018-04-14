@@ -2,19 +2,18 @@ require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var pg = require('pg');
+const path = require('path');
 const db = require('./db/index.js');
 
-var app = express();
+const app = express();
 
 app.use(express.static(__dirname + '/dist'));
 
-app.get('/', (req, res) => {
-  req.redirect('/home');
-});
-
-app.get('/home', function(req, res) {
+app.get('/home', (req, res) => {
   console.log('called');
-  db.load(function callback(data) {res.send(data)});
+  db.load((data) => {
+    res.send(data);
+  });
 });
 
 app.get('*', function(req, res){

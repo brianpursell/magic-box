@@ -1,6 +1,12 @@
 import React from 'react';
 import anime from 'animejs';
+<<<<<<< HEAD:web/src/components/Common/Loading.jsx
 import styles from '../../styles.scss';
+=======
+import '../styles.scss';
+
+// Got from https://codepen.io/juliangarnier/pen/rGjMyW, just changed CSS styles, duration and numberOfEls
+>>>>>>> 85d02270ef040cc66877516b795cede724c7ce96:react-client/src/components/Loading.jsx
 
 const Header = props => {
   console.log('called');
