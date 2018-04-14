@@ -2,22 +2,18 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const pg = require('pg');
-const path = require('path');
-const db = require('./db/index.js');
+const db = require('../database/index.js');
 
 const app = express();
 
-app.use(express.static(`${__dirname}/dist`));
+app.use(express.static(path.join(__dirname, '/../react-client/dist')));
+app.use(express.static(path.join(__dirname, '/../react-client/dist')));
 
 app.get('/home', (req, res) => {
   console.log('called');
   db.load((data) => {
     res.send(data);
   });
-});
-
-app.get('*', (req, res) => {
-  res.send('what???', 404);
 });
 
 app.get('/votes', (req, res) => {

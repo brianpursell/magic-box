@@ -3,8 +3,13 @@ DROP DATABASE IF EXISTS music;
 -- -- Create the db
 CREATE DATABASE music;
 
+<<<<<<< HEAD:music.sql
+-- Connect to the db
+\c music
+=======
 -- -- Connect to the db
 \c music;
+>>>>>>> b021d7b1005ff60c424078bb2135e846c1ed8d56:db/music.sql
 
 -- Make the new users table
 CREATE TABLE users (
@@ -30,6 +35,14 @@ CREATE TABLE songs (
   downvotes INTEGER
 );
 
+CREATE TABLE votes (
+  ID INTEGER PRIMARY KEY,
+  USER_ID INTEGER REFERENCES users(id),
+  SONG_ID INTEGER REFERENCES songs(id),
+  UPVOTE INTEGER,
+  DOWNVOTE INTEGER
+);
+
 -- Insert Test Users
 INSERT INTO users (id, name)
   VALUES (10, 'Jim Bob Phillips'),
@@ -48,7 +61,10 @@ INSERT INTO songs (id, user_id, genre_id, artist, title, url, upvotes, downvotes
     (1001, 11, 2, 'Justin Beiber', 'Baby', 'https://www.youtube.com/watch?v=kffacxfA7G4', 1000000, 80),
     (1002, 12, 3, 'Rick Astley', 'Never Gonna Give You Up', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 500, 10);
 
-
+INSERT INTO votes (id, user_id, song_id, upvote, downvote)
+  VALUES (1, 10, 1000, 1, 0),
+    (2, 11, 1001, 0, 1),
+    (3, 12, 1002, 1, 0);
 
 -- Run the below to get into the database and create a user and database on Ubuntu
 --  sudo service postgresql start
