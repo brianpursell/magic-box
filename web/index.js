@@ -12,6 +12,7 @@ app.use(express.static(`${__dirname}/dist`));
 app.get('/home', (req, res) => {
   console.log('called');
   db.load((data) => {
+    console.log('data: ', data)
     res.send(data);
   });
 });

@@ -26,6 +26,7 @@ class App extends React.Component {
     axios
       .get('/home')
       .then((response) => {
+        console.log('Response: ', response.data)
         thisHolder.setState({
           songsArray: response.data.rows,
           upVoteCount: response.data.upvotes,
