@@ -17,9 +17,13 @@
 //   //   display: block;
 //   // }
 
-//   // .sidenav a:hover {
-//   //   color: #f1f1f1;
-//   // }
+.sidenav {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+
 body {
   background-color: #42c6ff;
   background-image: linear-gradient(135deg, #42c6ff 0%, #ff0081 74%);

@@ -3,7 +3,6 @@ import '../../../styles.scss';
 import AudioSnippet from '../AudioSnippet/AudioSnippet.jsx';
 
 const SongList = props => (
-  // console.log(props),
   <div>
     {props.songsArray.map((song, index) => {
       if (index === props.songsArray.length - 1) {

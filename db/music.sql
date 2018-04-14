@@ -3,13 +3,8 @@ DROP DATABASE IF EXISTS music;
 -- -- Create the db
 CREATE DATABASE music;
 
-<<<<<<< HEAD:music.sql
 -- Connect to the db
 \c music
-=======
--- -- Connect to the db
-\c music;
->>>>>>> b021d7b1005ff60c424078bb2135e846c1ed8d56:db/music.sql
 
 -- Make the new users table
 CREATE TABLE users (
