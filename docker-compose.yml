@@ -1,0 +1,13 @@
+version: '3'
+services:
+  web:
+    build: "./web"
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+  db:
+    restart: "always"
+    build: "./db"
+    ports:
+      - "6000:5432"
