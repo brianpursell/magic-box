@@ -46,10 +46,10 @@ class App extends React.Component {
     axios
       .get('/votes')
       .then((vote) => {
-        console.log('I am  the vote ', vote);
+        console.log('I am  the vote ', vote.data);
         if (vote) {
           axios
-            .post('/votes')
+            .post('/votes', vote.data[0])
             .then((response) => {
               console.log('successful post to /votes', response);
             })
