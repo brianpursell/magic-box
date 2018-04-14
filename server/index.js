@@ -6,7 +6,8 @@ const db = require('../database/index.js');
 
 const app = express();
 
-app.use(express.static(`${__dirname}/../react-client/dist`));
+app.use(express.static(path.join(__dirname, '/../react-client/dist')));
+app.use(express.static(path.join(__dirname, '/../react-client/dist')));
 
 app.get('/home', (req, res) => {
   console.log('called');
@@ -31,5 +32,5 @@ app.post('/votes', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  // console.log('listening on port '.join(port).join('!'));
+  console.log(`listening on port ${port}!`);
 });
