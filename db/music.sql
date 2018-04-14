@@ -2,30 +2,27 @@
 DROP DATABASE IF EXISTS music;
 -- -- Create the db
 CREATE DATABASE music;
-
-<<<<<<< HEAD:music.sql
--- Connect to the db
-\c music
-=======
 -- -- Connect to the db
 \c music;
->>>>>>> b021d7b1005ff60c424078bb2135e846c1ed8d56:db/music.sql
-
 -- Make the new users table
-CREATE TABLE users (
+CREATE TABLE users
+(
   ID INTEGER PRIMARY KEY,
-  name VARCHAR
+  username VARCHAR,
+  password VARCHAR,
+  first_name VARCHAR,
+  last_name VARCHAR
 );
-
 -- Make the new genres table
-CREATE TABLE genres (
+CREATE TABLE genres
+(
   ID INTEGER PRIMARY KEY,
   name VARCHAR
 );
-
 -- Make the new songs table
-CREATE TABLE songs (
-  ID  INTEGER PRIMARY KEY,
+CREATE TABLE songs
+(
+  ID INTEGER PRIMARY KEY,
   USER_ID INTEGER REFERENCES users(id),
   GENRE_ID INTEGER REFERENCES genres(id),
   artist VARCHAR,
@@ -34,37 +31,41 @@ CREATE TABLE songs (
   upvotes INTEGER,
   downvotes INTEGER
 );
-
-CREATE TABLE votes (
+CREATE TABLE votes
+(
   ID INTEGER PRIMARY KEY,
   USER_ID INTEGER REFERENCES users(id),
   SONG_ID INTEGER REFERENCES songs(id),
   UPVOTE INTEGER,
   DOWNVOTE INTEGER
 );
-
 -- Insert Test Users
-INSERT INTO users (id, name)
-  VALUES (10, 'Jim Bob Phillips'),
-    (11, 'Haygood McGirth'),
-    (12, 'Rick McPickles');
-
+INSERT INTO users
+  (id, username, password, first_name, last_name)
+VALUES
+  (10, 'j_phillips', '1234', 'Jim Bob', 'Phillips'),
+  (11, 'h_mcgirth', '1234', 'Haygood', 'McGirth'),
+  (12, 'r_mcpickles', '1234', 'Rick', 'McPickles');
 -- Insert Test Genres
-INSERT INTO genres (id, name)
-  VALUES (1, 'Hipster'),
-    (2, 'Pop'),
-    (3, 'Blue-Eyed Soul');
-
+INSERT INTO genres
+  (id, name)
+VALUES
+  (1, 'Hipster'),
+  (2, 'Pop'),
+  (3, 'Blue-Eyed Soul');
 -- Insert Test Songs
-INSERT INTO songs (id, user_id, genre_id, artist, title, url, upvotes, downvotes)
-  VALUES (1000, 10, 1, 'Fitz and the Tantrums', 'HandClap', 'https://www.youtube.com/watch?v=Y2V6yjjPbX0', 3, 10),
-    (1001, 11, 2, 'Justin Beiber', 'Baby', 'https://www.youtube.com/watch?v=kffacxfA7G4', 1000000, 80),
-    (1002, 12, 3, 'Rick Astley', 'Never Gonna Give You Up', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 500, 10);
-
-INSERT INTO votes (id, user_id, song_id, upvote, downvote)
-  VALUES (1, 10, 1000, 1, 0),
-    (2, 11, 1001, 0, 1),
-    (3, 12, 1002, 1, 0);
+INSERT INTO songs
+  (id, user_id, genre_id, artist, title, url, upvotes, downvotes)
+VALUES
+  (1000, 10, 1, 'Fitz and the Tantrums', 'HandClap', 'https://www.youtube.com/watch?v=Y2V6yjjPbX0', 3, 10),
+  (1001, 11, 2, 'Justin Beiber', 'Baby', 'https://www.youtube.com/watch?v=kffacxfA7G4', 1000000, 80),
+  (1002, 12, 3, 'Rick Astley', 'Never Gonna Give You Up', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 500, 10);
+INSERT INTO votes
+  (id, user_id, song_id, upvote, downvote)
+VALUES
+  (1, 10, 1000, 1, 0),
+  (2, 11, 1001, 0, 1),
+  (3, 12, 1002, 1, 0);
 
 -- Run the below to get into the database and create a user and database on Ubuntu
 --  sudo service postgresql start
