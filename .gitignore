@@ -1,5 +1,4 @@
 node_modules/
-<<<<<<< HEAD
 .elasticbeanstalk/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
@@ -8,8 +7,3 @@ node_modules/
 web/package-lock.json
 .env
 web/dist/bundle.js
-=======
-.env
-package-lock.json
-react-client/dist/bundle.js
->>>>>>> 85d02270ef040cc66877516b795cede724c7ce96
