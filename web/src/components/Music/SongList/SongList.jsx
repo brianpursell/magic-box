@@ -1,6 +1,6 @@
 import React from 'react';
-import '../styles.scss';
-import AudioSnippet from './AudioSnippet';
+import '../../../styles.scss';
+import AudioSnippet from '../AudioSnippet/AudioSnippet.jsx';
 
 const SongList = props => (
   // console.log(props),

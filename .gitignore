@@ -1,4 +1,4 @@
 node_modules/
+web/package-lock.json
 .env
-package-lock.json
-react-client/dist/bundle.js
+web/dist/bundle.js
