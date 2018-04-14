@@ -1,14 +1,15 @@
 const pg = require('pg');
 const log = require('node-logger');
-//Need to add local connection details
+// Need to add local connection details
 const bodyParser = require('body-parser');
+
 const client = new pg.Client();
 client
   .connect()
   .then(() => {
     console.log(`Connected To ${client.database} at ${client.host}:${client.port}`);
   })
-  .catch((err) => console.error(err));
+  .catch(err => console.error(err));
 
 module.exports = {
   query: (text, params, callback) => {
@@ -38,7 +39,7 @@ module.exports = {
 //   });
 
 // get for homepage
-function load(callback) {
+const load = (callback) => {
   client
     .query('SELECT * FROM songs')
     .then((data) => {
@@ -47,7 +48,31 @@ function load(callback) {
     .catch((err) => {
       console.error(err);
     });
-}
+};
+
+const toggleVote = (song, vote, callback) => {
+  client
+    .query(`select ${vote.upvote}, case when ${vote.upvote}=1 then 0 else 1`)
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const didVote = (currentUserId, clickedSongId, callback) => {
+  client
+    .query(`Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId}`)
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 module.exports.load = load;
 module.exports.client = client;
+module.exports.didVote = didVote;
+module.exports.toggleVote = toggleVote;
