@@ -2,12 +2,8 @@ const pg = require('pg');
 var fs = require('file-system');
 const log = require('node-logger');
 //Need to add local connection details
-const connectionString = process.env.DATABASE_URL;
-console.log("CONNECTION STRING: ",connectionString)
 const bodyParser = require('body-parser');
-const client = new pg.Client({
-  connectionString: connectionString
-});
+const client = new pg.Client();
 client
   .connect()
   .then(() => {

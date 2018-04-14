@@ -1,7 +1,7 @@
 FROM node:carbon
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/src/
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -16,7 +16,8 @@ RUN npm install
 COPY . .
 
 ENV PORT=8080
-ENV DATABASE_URL=postgresql://postgres:mysecretpassword@localhost:5000/music
-
+ENV PGHOST=db
+ENV PGUSER=postgres
+ENV PGDATABASE=music
 EXPOSE 8080
 CMD [ "npm", "start" ]

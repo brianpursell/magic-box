@@ -1,9 +1,9 @@
--- Get rid of the db if it exists
+-- -- Get rid of the db if it exists
 DROP DATABASE IF EXISTS music;
--- Create the db
+-- -- Create the db
 CREATE DATABASE music;
 
--- Connect to the db
+-- -- Connect to the db
 \c music;
 
 -- Make the new users table
