@@ -17,13 +17,23 @@
 //   //   display: block;
 //   // }
 
-.sidenav {
+.app {
+  flex-direction: row;
   display: flex;
-  flex: 1;
-  flex-direction: column;
+  height: 100%;
 }
 
+.sidenav {
+  background-color: black;
+}
 
+.main-row {
+  height: 100%
+}
+
+html, body, #app {
+  height: 100%;
+}
 body {
   background-color: #42c6ff;
   background-image: linear-gradient(135deg, #42c6ff 0%, #ff0081 74%);
