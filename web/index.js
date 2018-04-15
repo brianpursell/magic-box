@@ -10,9 +10,29 @@ const app = express();
 app.use(express.static(`${__dirname}/dist`));
 
 app.get('/home', (req, res) => {
+  db.load(data => {
+    res.send(data.rows);
+  });
+});
+
+app.get('/users', (req, res) => {
+  db.users(data => {
+    res.send(data.rows);
+  });
+});
+
+app.post('/signup', (req, res) => {
+  console.log(req.body);
+  db.signup(req.body, response => {
+    res.send(req.body);
+  });
+});
+
+app.get('*', function(req, res) {
+  res.send('what???', 404);
   console.log('called');
-  db.load((data) => {
-    console.log('data: ', data)
+  db.load(data => {
+    console.log('data: ', data);
     res.send(data);
   });
 });
@@ -22,7 +42,7 @@ app.get('*', (req, res) => {
 });
 
 app.get('/votes', (req, res) => {
-  db.didVote(10, 1000, (data) => {
+  db.didVote(10, 1000, data => {
     res.send(data.rows);
   });
 });
