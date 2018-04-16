@@ -2,8 +2,9 @@
 DROP DATABASE IF EXISTS music;
 -- -- Create the db
 CREATE DATABASE music;
--- -- Connect to the db
-\c music;
+
+-- Connect to the db
+\c music
 -- Make the new users table
 CREATE TABLE users
 (
