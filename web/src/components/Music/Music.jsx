@@ -9,11 +9,11 @@ class Music extends Component {
     super(props);
     this.state = {
       gotCreatedSong: true,
-      songsArray: [1],
+      songsArray: [],
       upVoteCount: 0,
       downVoteCount: 0,
       didVote: false,
-      userId: 10,
+      userId: 10
     };
     this.makeMagic = this.makeMagic.bind(this);
     this.upVote = this.upVote.bind(this);
@@ -24,15 +24,15 @@ class Music extends Component {
     const thisHolder = this;
     axios
       .get('/home')
-      .then((response) => {
-        console.log('Response: ', response.data)
+      .then(response => {
+        console.log('Response: ', response.data);
         thisHolder.setState({
-          songsArray: response.data.rows,
+          songsArray: response.data,
           upVoteCount: response.data.upvotes,
-          downVoteCount: response.data.downvotes,
+          downVoteCount: response.data.downvotes
         });
       })
-      .catch((error) => {
+      .catch(error => {
         throw error;
       });
   }
@@ -45,24 +45,24 @@ class Music extends Component {
     const thisHolder = this;
     axios
       .get('/votes')
-      .then((vote) => {
+      .then(vote => {
         console.log('I am  the vote ', vote.data);
         if (vote) {
           axios
             .post('/votes', vote.data[0])
-            .then((response) => {
+            .then(response => {
               console.log('successful post to /votes', response);
             })
-            .catch((error) => {
+            .catch(error => {
               throw error;
             });
         } else {
           thisHolder.setState({
-            didVote: false,
+            didVote: false
           });
         }
       })
-      .catch((error) => {
+      .catch(error => {
         throw error;
       });
     // console.log(this, 'UpVote');
