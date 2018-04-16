@@ -74,7 +74,7 @@ class Music extends Component {
 
   render() {
     return (
-      <div>
+      <div className="MainDiv">
         <button onClick={this.makeMagic} className="MagicButton">
           Make Magic
         </button>
