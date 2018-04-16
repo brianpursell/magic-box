@@ -2,8 +2,14 @@ import React from 'react';
 import '../../../styles.scss';
 
 const AudioSnippet = props => (
-  <div>
-    <div className={props.className}>
+    <div className="player">
+      <audio controls className="AudioPlayer">
+        <source
+          src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${props.song.url}.mp3`}
+          type="video/mp4"
+        />
+      </audio>
+      
       <div className="songName">{props.song.title}</div>
 
       <div className="Votes">
@@ -24,14 +30,7 @@ const AudioSnippet = props => (
       </div>
 
       <div className="artist">{props.song.artist}</div>
-      <audio controls className="AudioPlayer">
-        <source
-          src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${props.song.url}.mp3`}
-          type="video/mp4"
-        />>
-      </audio>
     </div>
-  </div>
 );
 
 export default AudioSnippet;
