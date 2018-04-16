@@ -28,7 +28,7 @@ app.post('/signup', (req, res) => {
   });
 });
 
-app.get(['/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
+app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
   // res.send('what???', 404);
   console.log('called');
   db.load((data) => {
@@ -42,9 +42,14 @@ app.get(['/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
 // });
 
 app.get('/votes', (req, res) => {
-  db.didVote(10, 1000, (data) => {
+  db.didVote(11, 1000, (data) => {
     console.log('these are the data.rows => ', data.rows);
-    res.send('these are the data.rows => ', data.rows);
+    if (data.rows.length) {
+      return true;
+    }
+    return false;
+
+    res.send(data.rows);
   });
 });
 
