@@ -41,25 +41,23 @@ app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) 
 //   res.send('what???', 404);
 // });
 
+//= ====GOTTA FIX USER INFO BELOW WHEN USERS ARE IMPLEMENTED=======
 app.get('/votes', (req, res) => {
   db.didVote(11, 1000, (data) => {
-    console.log('these are the data.rows => ', data.rows);
-    if (data.rows.length) {
-      return true;
-    }
-    return false;
-
     res.send(data.rows);
   });
 });
 
 app.post('/votes', (req, res) => {
-  console.log('I am the req.body => ', req.body);
-  db.toggleVote(song, vote, (data) => {
-    console.log('Vote Toggled!');
-    console.log('this is the data that got to the server from the votes post req => ', data);
+  let body = '';
+  req.on('data', (data) => {
+    body += data;
   });
-  res.send(data);
+  console.log('I am the req.body => ', body);
+  db.toggleVote(body.song_id, body, (data) => {
+    console.log('Vote Toggled and heres the response data => ', data);
+  });
+  res.send();
 });
 
 const port = process.env.PORT || 3000;

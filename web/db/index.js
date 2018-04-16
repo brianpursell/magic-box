@@ -47,9 +47,9 @@ const signup = (values, callback) => {
     .catch(console.error(err));
 };
 
-const toggleVote = (song, vote, callback) => {
+const toggleVote = (song_id, vote, callback) => {
   client
-    .query(`select ${vote.upvote}, case when ${vote.upvote}=1 then 0 else 1`)
+    .query(`select ${vote.id}, case when ${vote.upvote}=1 then 0 else 1`)
     .then((data) => {
       callback(data);
     })
