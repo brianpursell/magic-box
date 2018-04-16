@@ -2,7 +2,6 @@
 DROP DATABASE IF EXISTS music;
 -- -- Create the db
 CREATE DATABASE music;
-
 -- Connect to the db
 \c music
 -- Make the new users table
@@ -58,9 +57,9 @@ VALUES
 INSERT INTO songs
   (id, user_id, genre_id, artist, title, url, upvotes, downvotes)
 VALUES
-  (1000, 10, 1, 'Fitz and the Tantrums', 'HandClap', 'https://www.youtube.com/watch?v=Y2V6yjjPbX0', 3, 10),
-  (1001, 11, 2, 'Justin Beiber', 'Baby', 'https://www.youtube.com/watch?v=kffacxfA7G4', 1000000, 80),
-  (1002, 12, 3, 'Rick Astley', 'Never Gonna Give You Up', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 500, 10);
+  (1000, 10, 1, 'The Bashing Pythons', 'Big Crumble', 'big_crumble', 3, 10),
+  (1001, 11, 2, 'AI', 'Ending', 'ending', 1000000, 80),
+  (1002, 12, 3, 'Rick Astley', 'flute', 'flute', 500, 10);
 INSERT INTO votes
   (id, user_id, song_id, upvote, downvote)
 VALUES
