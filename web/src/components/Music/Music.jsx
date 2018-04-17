@@ -25,7 +25,6 @@ class Music extends Component {
     axios
       .get('/home')
       .then((response) => {
-        console.log('Response: ', response.data);
         thisHolder.setState({
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
@@ -41,26 +40,31 @@ class Music extends Component {
     this.setState({ gotCreatedSong: false });
   }
 
-  // getVoteData() {
-  //   return axios.get('/votes');
-  // }
-
   postVoteData(voteType, vote) {
     axios
       .post('/votes', { voteType, vote })
       .then((res) => {
-        console.log('successful post to /votes => ', res);
-        res.send();
+        res.send(res);
       })
       .catch((err) => {
         throw err;
       });
   }
 
-  upVote() {
+  // Need to pass down the currentUserId and the songId to the upVote and the downVote methods so the didVote method can be called and the db get queried
+  /*
+, {
+        params: {
+          userId: currentUserId,
+          songId: clickedSongId,
+        },
+      }
+  */
+  upVote(e) {
+    const that = this;
     let voteData;
     const voteType = 'upvote';
-    console.log();
+
     axios
       .get('/votes')
       .then((vote) => {
@@ -69,6 +73,20 @@ class Music extends Component {
       })
       .then((data) => {
         this.postVoteData(voteType, data);
+      })
+      .then(() => {
+        axios
+          .get('/music')
+          .then((response) => {
+            that.setState({
+              songsArray: response.data,
+              upVoteCount: response.data.upvotes,
+              downVoteCount: response.data.downvotes,
+            });
+          })
+          .catch((error) => {
+            throw error;
+          });
       })
       .catch((error) => {
         throw error;
