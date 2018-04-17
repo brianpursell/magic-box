@@ -50,9 +50,12 @@ const signup = (values, callback) => {
 const toggleVote = (vote, callback) => {
   vote = JSON.parse(vote);
   vote = vote.vote[0];
+  console.log('Confirming the vote got to the toggle vote query => ', vote);
 
   client
-    .query(`select ${vote.id}, case when ${vote.upvote}=1 then 0 else 1 end from votes;`)
+    .query(`update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end) where id = ${
+      vote.id
+    };`)
     .then((data) => {
       callback(data);
     })

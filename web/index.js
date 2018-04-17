@@ -58,7 +58,7 @@ app.post('/votes', (req, res) => {
   req.on('end', () => {
     console.log('I am the body => ', body);
     db.toggleVote(body, (res) => {
-      console.log('Vote Toggled and heres the response data => ', res.data);
+      console.log('Vote Toggled and heres the response data => ', res.rows);
     });
   });
 });
