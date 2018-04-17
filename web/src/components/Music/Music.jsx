@@ -57,7 +57,7 @@ class Music extends Component {
       });
   }
 
-  upVote(e) {
+  upVote() {
     let voteData;
     const voteType = 'upvote';
     console.log();
