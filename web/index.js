@@ -54,7 +54,6 @@ app.post('/votes', (req, res) => {
     body += data;
   });
   // console.log('I am the req.body => ', req.body);
-
   req.on('end', () => {
     console.log('I am the body => ', body);
     db.toggleVote(body, (res) => {

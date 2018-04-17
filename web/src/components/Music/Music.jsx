@@ -74,7 +74,19 @@ class Music extends Component {
   }
 
   downVote() {
-    // console.log(this, 'DownVote');
+    let voteData;
+    axios
+      .get('/votes')
+      .then((vote) => {
+        voteData = vote.data;
+        return voteData;
+      })
+      .then((data) => {
+        this.postVoteData(data);
+      })
+      .catch((error) => {
+        throw error;
+      });
   }
 
   render() {
