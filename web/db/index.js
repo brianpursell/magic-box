@@ -7,69 +7,67 @@ const client = new pg.Client();
 client
   .connect()
   .then(() => {
-    console.log(
-      `Connected To ${client.database} at ${client.host}:${client.port}`
-    );
+    console.log(`Connected To ${client.database} at ${client.host}:${client.port}`);
   })
   .catch(err => console.error(err));
 
 // get for homepage
-const load = callback => {
+const load = (callback) => {
   client
     .query('SELECT * FROM songs')
-    .then(data => {
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };
 
-const users = callback => {
+const users = (callback) => {
   client
     .query('SELECT * FROM users')
-    .then(data => {
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };
 
 const signup = (values, callback) => {
   const query = {
-    text:
-      'INSERT INTO users (username, password, first_name, last_name) VALUES($1, $2, $3, $4);',
-    values: values
+    text: 'INSERT INTO users (username, password, first_name, last_name) VALUES($1, $2, $3, $4);',
+    values,
   };
   client
     .query(query)
-    .then(res => {
+    .then((res) => {
       callback(res);
     })
     .catch(console.error(err));
 };
 
-const toggleVote = (song, vote, callback) => {
+const toggleVote = (vote, callback) => {
+  vote = JSON.parse(vote);
+  vote = vote.vote[0];
+
   client
-    .query(`select ${vote.upvote}, case when ${vote.upvote}=1 then 0 else 1`)
-    .then(data => {
+    .query(`select ${vote.id}, case when ${vote.upvote}=1 then 0 else 1 end from votes;`)
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };
 
 const didVote = (currentUserId, clickedSongId, callback) => {
   client
-    .query(
-      `Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId}`
-    )
-    .then(data => {
+    .query(`Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId}`)
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };

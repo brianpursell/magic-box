@@ -13,7 +13,7 @@ class Music extends Component {
       upVoteCount: 0,
       downVoteCount: 0,
       didVote: false,
-      userId: 10
+      userId: 10,
     };
     this.makeMagic = this.makeMagic.bind(this);
     this.upVote = this.upVote.bind(this);
@@ -24,15 +24,15 @@ class Music extends Component {
     const thisHolder = this;
     axios
       .get('/home')
-      .then(response => {
+      .then((response) => {
         console.log('Response: ', response.data);
         thisHolder.setState({
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
-          downVoteCount: response.data.downvotes
+          downVoteCount: response.data.downvotes,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   }
@@ -41,31 +41,36 @@ class Music extends Component {
     this.setState({ gotCreatedSong: false });
   }
 
+  // getVoteData() {
+  //   return axios.get('/votes');
+  // }
+
+  postVoteData(vote) {
+    axios
+      .post('/votes', { vote })
+      .then((res) => {
+        console.log('successful post to /votes => ', res);
+        res.send();
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }
+
   upVote(e) {
-    const thisHolder = this;
+    let voteData;
     axios
       .get('/votes')
-      .then(vote => {
-        console.log('I am  the vote ', vote.data);
-        if (vote) {
-          axios
-            .post('/votes', vote.data[0])
-            .then(response => {
-              console.log('successful post to /votes', response);
-            })
-            .catch(error => {
-              throw error;
-            });
-        } else {
-          thisHolder.setState({
-            didVote: false
-          });
-        }
+      .then((vote) => {
+        voteData = vote.data;
+        return voteData;
       })
-      .catch(error => {
+      .then((data) => {
+        this.postVoteData(data);
+      })
+      .catch((error) => {
         throw error;
       });
-    // console.log(this, 'UpVote');
   }
 
   downVote() {
