@@ -47,21 +47,51 @@ const signup = (values, callback) => {
     .catch(console.error(err));
 };
 
-const toggleVote = (vote, callback) => {
-  vote = JSON.parse(vote);
-  vote = vote.vote[0];
-  console.log('Confirming the vote got to the toggle vote query => ', vote);
-
+const votesQuery = (params, voteId, callback) => {
   client
-    .query(`update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end) where id = ${
-      vote.id
-    };`)
+    .query(`${params} where id = ${voteId};`)
     .then((data) => {
       callback(data);
     })
     .catch((err) => {
       console.error(err);
     });
+};
+
+const toggleVote = (vote, callback) => {
+  vote = JSON.parse(vote);
+  const voteType = vote.voteType;
+  vote = vote.vote[0];
+  const voteId = vote.id;
+  const upVoteCount = vote.upvote;
+  const downVoteCount = vote.downvote;
+  const totalVotes = upVoteCount + downVoteCount;
+
+  if (voteType === 'upvote') {
+    if (totalVotes === 1 && upVoteCount === 1) {
+      votesQuery('update votes set upvote = 0', voteId, callback);
+    } else if (totalVotes === 1 && upVoteCount === 0) {
+      votesQuery(
+        'update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end)',
+        voteId,
+        callback,
+      );
+    } else if (totalVotes === 0) {
+      votesQuery('update votes set upvote = 1', voteId, callback);
+    }
+  } else if (voteType === 'downvote') {
+    if (totalVotes === 1 && downVoteCount === 1) {
+      votesQuery('update votes set downvote = 0', voteId, callback);
+    } else if (totalVotes === 1 && downVoteCount === 0) {
+      votesQuery(
+        'update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end)',
+        voteId,
+        callback,
+      );
+    } else if (totalVotes === 0) {
+      votesQuery('update votes set downvote = 1', voteId, callback);
+    }
+  }
 };
 
 const didVote = (currentUserId, clickedSongId, callback) => {

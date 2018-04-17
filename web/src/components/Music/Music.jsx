@@ -45,9 +45,9 @@ class Music extends Component {
   //   return axios.get('/votes');
   // }
 
-  postVoteData(vote) {
+  postVoteData(voteType, vote) {
     axios
-      .post('/votes', { vote })
+      .post('/votes', { voteType, vote })
       .then((res) => {
         console.log('successful post to /votes => ', res);
         res.send();
@@ -59,6 +59,8 @@ class Music extends Component {
 
   upVote(e) {
     let voteData;
+    const voteType = 'upvote';
+    console.log();
     axios
       .get('/votes')
       .then((vote) => {
@@ -66,7 +68,7 @@ class Music extends Component {
         return voteData;
       })
       .then((data) => {
-        this.postVoteData(data);
+        this.postVoteData(voteType, data);
       })
       .catch((error) => {
         throw error;
@@ -75,6 +77,7 @@ class Music extends Component {
 
   downVote() {
     let voteData;
+    const voteType = 'downvote';
     axios
       .get('/votes')
       .then((vote) => {
@@ -82,7 +85,7 @@ class Music extends Component {
         return voteData;
       })
       .then((data) => {
-        this.postVoteData(data);
+        this.postVoteData(voteType, data);
       })
       .catch((error) => {
         throw error;

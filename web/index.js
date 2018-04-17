@@ -43,7 +43,7 @@ app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) 
 
 //= ====GOTTA FIX USER INFO BELOW WHEN USERS ARE IMPLEMENTED=======
 app.get('/votes', (req, res) => {
-  db.didVote(11, 1000, (data) => {
+  db.didVote(10, 1000, (data) => {
     res.send(data.rows);
   });
 });
@@ -54,8 +54,10 @@ app.post('/votes', (req, res) => {
     body += data;
   });
   // console.log('I am the req.body => ', req.body);
+
   req.on('end', () => {
     console.log('I am the body => ', body);
+
     db.toggleVote(body, (res) => {
       console.log('Vote Toggled and heres the response data => ', res.rows);
     });
