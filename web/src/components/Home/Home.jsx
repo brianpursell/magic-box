@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Login from '../../Login.jsx';
 
 class Home extends Component {
   state = {
@@ -8,7 +9,7 @@ class Home extends Component {
   render = () => {
     return (
       <div>
-        Home
+        <Login />
       </div>
     );
   }
