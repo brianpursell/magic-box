@@ -53,7 +53,7 @@ class Music extends Component {
         res.send();
       })
       .catch((err) => {
-        throw error;
+        throw err;
       });
   }
 

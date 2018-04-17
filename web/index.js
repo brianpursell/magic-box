@@ -53,11 +53,14 @@ app.post('/votes', (req, res) => {
   req.on('data', (data) => {
     body += data;
   });
-  console.log('I am the req.body => ', body);
-  db.toggleVote(body.song_id, body, (data) => {
-    console.log('Vote Toggled and heres the response data => ', data);
+  // console.log('I am the req.body => ', req.body);
+
+  req.on('end', () => {
+    console.log('I am the body => ', body);
+    db.toggleVote(body, (res) => {
+      console.log('Vote Toggled and heres the response data => ', res.data);
+    });
   });
-  res.send();
 });
 
 const port = process.env.PORT || 3000;
