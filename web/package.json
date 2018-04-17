@@ -2,7 +2,7 @@
   "name": "magic-box",
   "version": "1.0.0",
   "description": "",
-  "main": "App.jsx",
+  "main": "index.js",
   "scripts": {
     "start": "webpack | node index.js",
     "react-dev": "webpack -d --watch",
