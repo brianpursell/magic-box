@@ -93,7 +93,8 @@ class Music extends Component {
       });
   }
 
-  downVote() {
+  downVote(e) {
+    const that = this;
     let voteData;
     const voteType = 'downvote';
     axios
@@ -104,6 +105,20 @@ class Music extends Component {
       })
       .then((data) => {
         this.postVoteData(voteType, data);
+      })
+      .then(() => {
+        axios
+          .get('/music')
+          .then((response) => {
+            that.setState({
+              songsArray: response.data,
+              upVoteCount: response.data.upvotes,
+              downVoteCount: response.data.downvotes,
+            });
+          })
+          .catch((error) => {
+            throw error;
+          });
       })
       .catch((error) => {
         throw error;
@@ -117,16 +132,14 @@ class Music extends Component {
           Make Magic
         </button>
         <div className="wrapper" />
-
         {this.state.gotCreatedSong === false ? <Loading /> : null}
-        <SongList
-          upVoteCount={this.state.upVoteCount}
-          downVoteCount={this.state.downVoteCount}
-          songsArray={this.state.songsArray}
-          upVote={this.upVote}
-          downVote={this.downVote}
-          didVote={this.didVote}
-          userId={this.userId}
+        upVoteCount={this.state.upVoteCount}
+        downVoteCount={this.state.downVoteCount}
+        songsArray={this.state.songsArray}
+        upVote={this.upVote}
+        downVote={this.downVote}
+        didVote={this.didVote}
+        userId={this.userId}
         />
       </div>
     );
