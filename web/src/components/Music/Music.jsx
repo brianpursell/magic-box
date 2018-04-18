@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import axios from "axios";
-import SongList from "./SongList/SongList.jsx";
-import Loading from "../Common/Loading.jsx";
-import "../../styles.scss";
+import React, { Component } from 'react';
+import axios from 'axios';
+import SongList from './SongList/SongList.jsx';
+import Loading from '../Common/Loading.jsx';
+import '../../styles.scss';
 
 class Music extends Component {
   constructor(props) {
@@ -13,7 +13,7 @@ class Music extends Component {
       upVoteCount: 0,
       downVoteCount: 0,
       didVote: false,
-      userId: 10
+      userId: 10,
     };
     this.makeMagic = this.makeMagic.bind(this);
     this.upVote = this.upVote.bind(this);
@@ -23,15 +23,15 @@ class Music extends Component {
   componentDidMount() {
     const thisHolder = this;
     axios
-      .get("/home")
-      .then(response => {
+      .get('/home')
+      .then((response) => {
         thisHolder.setState({
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
-          downVoteCount: response.data.downvotes
+          downVoteCount: response.data.downvotes,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   }
@@ -42,11 +42,11 @@ class Music extends Component {
 
   postVoteData(voteType, vote) {
     axios
-      .post("/votes", { voteType, vote })
-      .then(res => {
+      .post('/votes', { voteType, vote })
+      .then((res) => {
         res.send(res);
       })
-      .catch(err => {
+      .catch((err) => {
         throw err;
       });
   }
@@ -60,35 +60,36 @@ class Music extends Component {
         },
       }
   */
-  upVote(e) {
+  upVote(song) {
     const that = this;
     let voteData;
-    const voteType = "upvote";
+    const voteType = 'upvote';
 
     axios
-      .get("/votes")
-      .then(vote => {
+      .get('/votes', { params: { song } })
+      .then((vote) => {
         voteData = vote.data;
+        console.log('I am the voteData in the axios then => ', voteData);
         return voteData;
       })
-      .then(data => {
+      .then((data) => {
         this.postVoteData(voteType, data);
       })
       .then(() => {
         axios
-          .get("/music")
-          .then(response => {
+          .get('/music')
+          .then((response) => {
             that.setState({
               songsArray: response.data,
               upVoteCount: response.data.upvotes,
-              downVoteCount: response.data.downvotes
+              downVoteCount: response.data.downvotes,
             });
           })
-          .catch(error => {
+          .catch((error) => {
             throw error;
           });
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   }
@@ -96,31 +97,31 @@ class Music extends Component {
   downVote(e) {
     const that = this;
     let voteData;
-    const voteType = "downvote";
+    const voteType = 'downvote';
     axios
-      .get("/votes")
-      .then(vote => {
+      .get('/votes')
+      .then((vote) => {
         voteData = vote.data;
         return voteData;
       })
-      .then(data => {
+      .then((data) => {
         this.postVoteData(voteType, data);
       })
       .then(() => {
         axios
-          .get("/music")
-          .then(response => {
+          .get('/music')
+          .then((response) => {
             that.setState({
               songsArray: response.data,
               upVoteCount: response.data.upvotes,
-              downVoteCount: response.data.downvotes
+              downVoteCount: response.data.downvotes,
             });
           })
-          .catch(error => {
+          .catch((error) => {
             throw error;
           });
       })
-      .catch(error => {
+      .catch((error) => {
         throw error;
       });
   }

@@ -17,7 +17,7 @@ const AudioSnippet = props => (
         song={props.song}
         className="UpVoteArrow"
         src="https://i.imgur.com/8yJfihe.png"
-        onClick={props.upVote}
+        onClick={() => props.upVote(props.song)}
         alt=""
       />
       {props.song.upvotes}
@@ -25,7 +25,7 @@ const AudioSnippet = props => (
         song={props.song}
         className="DownVoteArrow"
         src="https://i.imgur.com/ZA2BSbi.png"
-        onClick={props.downVote}
+        onClick={() => props.downVote(props.song)}
         alt=""
       />
       {props.song.downvotes}

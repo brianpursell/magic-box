@@ -44,7 +44,7 @@ const signup = (values, callback) => {
     .then((res) => {
       callback(res);
     })
-    .catch(console.error(err));
+    .catch(err => console.error(err));
 };
 
 const votesQuery = (params, voteId, callback) => {
