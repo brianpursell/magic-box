@@ -2,6 +2,7 @@
   flex-direction: row;
   display: flex;
   height: 100%;
+  background-color: #edf7f7;
 }
 
 .sidenav {
@@ -28,7 +29,7 @@ body {
 
 .MagicButton {
   margin-top: 75px;
-  margin-left: 75px;
+  margin-left: 130px;
   margin-right: 20%;
   height: 50px;
   width: 15%;
@@ -61,7 +62,6 @@ body {
   //background: white;
 }
 
-
 @keyframes Gradient {
   0% {
     background-position: 0% 50%;
@@ -84,7 +84,7 @@ body {
   width: 60%;
   position: relative;
   margin-top: 30px;
-  margin-left: 75px;
+  margin-left: 130px;
   margin-right: 50%;
   background-color: #42c6ff;
   box-shadow: 0 3px rgba(4, 23, 27, 0.438);
@@ -139,4 +139,53 @@ body {
 }
 .player .DownVoteArrow:active {
   transform: translateY(1.5px);
+}
+
+.NavBarItemLabel {
+  padding-top: 10px;
+}
+
+.iconTitle {
+  padding-top: 20px;
+}
+
+.ui.vertical.menu {
+  width: 10rem !important;
+  height: 100%;
+}
+
+.item {
+  text-align: center !important;
+}
+a.item:active {
+  transform: translateY(2px);
+}
+a.item:hover {
+  background-color: #42c6ff !important;
+  background-image: linear-gradient(
+    135deg,
+    #42c6ff,
+    #ff0081,
+    #42c6ff,
+    #ff0081,
+    #42c6ff
+  ) !important;
+  background-size: 400% 400% !important;
+  animation: Gradient 5s ease infinite !important;
+}
+
+.ui.vertical.menu .item {
+  padding-top: 15%;
+}
+
+.ui.menu > .item:first-child {
+  border-radius: 0%;
+}
+
+.ui.inverted.menu {
+  background: #404040 !important;
+}
+.ui.menu {
+  margin: 0rem 0 !important;
+  border-radius: 0rem !important;
 }
