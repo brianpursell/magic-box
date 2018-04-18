@@ -1,6 +1,6 @@
-import React from 'react';
-import '../../../styles.scss';
-import AudioSnippet from '../AudioSnippet/AudioSnippet.jsx';
+import React from "react";
+import "../../../styles.scss";
+import AudioSnippet from "../AudioSnippet/AudioSnippet.jsx";
 
 const SongList = props => (
   <div className="SongListMainDiv">

@@ -1,17 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+import Login from "../../Login.jsx";
 
 class Home extends Component {
-  state = {
-
-  }
+  state = {};
 
   render = () => {
-    return (
-      <div>
-        Home
-      </div>
-    );
-  }
+    return <div>Home</div>;
+  };
 }
 
 export default Home;
