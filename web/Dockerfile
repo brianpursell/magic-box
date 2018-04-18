@@ -15,10 +15,10 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-ENV PORT=8080
+ENV PORT=8081
 ENV PGHOST=db
 ENV PGUSER=postgres
 ENV PGDATABASE=music
-EXPOSE 8080
+EXPOSE 8081
 CMD ["npm", "install"]
 CMD ["npm", "start"]

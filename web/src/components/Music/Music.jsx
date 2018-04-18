@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import SongList from './SongList/SongList.jsx';
-import Loading from '../Common/Loading.jsx';
-import '../../styles.scss';
+import React, { Component } from "react";
+import axios from "axios";
+import SongList from "./SongList/SongList.jsx";
+import Loading from "../Common/Loading.jsx";
+import "../../styles.scss";
 
 class Music extends Component {
   constructor(props) {
@@ -23,9 +23,8 @@ class Music extends Component {
   componentDidMount() {
     const thisHolder = this;
     axios
-      .get('/home')
+      .get("/home")
       .then(response => {
-        console.log('Response: ', response.data);
         thisHolder.setState({
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
@@ -41,45 +40,98 @@ class Music extends Component {
     this.setState({ gotCreatedSong: false });
   }
 
-  upVote(e) {
-    const thisHolder = this;
+  postVoteData(voteType, vote) {
     axios
-      .get('/votes')
+      .post("/votes", { voteType, vote })
+      .then(res => {
+        res.send(res);
+      })
+      .catch(err => {
+        throw err;
+      });
+  }
+
+  // Need to pass down the currentUserId and the songId to the upVote and the downVote methods so the didVote method can be called and the db get queried
+  /*
+, {
+        params: {
+          userId: currentUserId,
+          songId: clickedSongId,
+        },
+      }
+  */
+  upVote(e) {
+    const that = this;
+    let voteData;
+    const voteType = "upvote";
+
+    axios
+      .get("/votes")
       .then(vote => {
-        console.log('I am  the vote ', vote.data);
-        if (vote) {
-          axios
-            .post('/votes', vote.data[0])
-            .then(response => {
-              console.log('successful post to /votes', response);
-            })
-            .catch(error => {
-              throw error;
+        voteData = vote.data;
+        return voteData;
+      })
+      .then(data => {
+        this.postVoteData(voteType, data);
+      })
+      .then(() => {
+        axios
+          .get("/music")
+          .then(response => {
+            that.setState({
+              songsArray: response.data,
+              upVoteCount: response.data.upvotes,
+              downVoteCount: response.data.downvotes
             });
-        } else {
-          thisHolder.setState({
-            didVote: false
+          })
+          .catch(error => {
+            throw error;
           });
-        }
       })
       .catch(error => {
         throw error;
       });
-    // console.log(this, 'UpVote');
   }
 
-  downVote() {
-    // console.log(this, 'DownVote');
+  downVote(e) {
+    const that = this;
+    let voteData;
+    const voteType = "downvote";
+    axios
+      .get("/votes")
+      .then(vote => {
+        voteData = vote.data;
+        return voteData;
+      })
+      .then(data => {
+        this.postVoteData(voteType, data);
+      })
+      .then(() => {
+        axios
+          .get("/music")
+          .then(response => {
+            that.setState({
+              songsArray: response.data,
+              upVoteCount: response.data.upvotes,
+              downVoteCount: response.data.downvotes
+            });
+          })
+          .catch(error => {
+            throw error;
+          });
+      })
+      .catch(error => {
+        throw error;
+      });
   }
 
   render() {
     return (
-      <div>
+      <div className="MainDiv">
         <button onClick={this.makeMagic} className="MagicButton">
           Make Magic
         </button>
         <div className="wrapper" />
-
         {this.state.gotCreatedSong === false ? <Loading /> : null}
         <SongList
           upVoteCount={this.state.upVoteCount}

@@ -3,19 +3,19 @@
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 100 100" style="enable-background:new 0 0 100 100;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#FFFFFF;stroke:#C1272D;stroke-width:7;stroke-miterlimit:10;}
-	.st1{fill:#00FF00;stroke:#C1272D;stroke-width:2;stroke-miterlimit:10;}
-	.st2{fill:#00FFFF;stroke:#C1272D;stroke-width:2;stroke-miterlimit:10;}
-	.st3{fill:#FF00FF;stroke:#C1272D;stroke-width:2;stroke-miterlimit:10;}
-	.st4{fill:#FFFF00;stroke:#C1272D;stroke-width:2;stroke-miterlimit:10;}
+	.st0{fill:none;stroke:#42c6ff;stroke-width:7;stroke-miterlimit:10;}
+	<!-- .st1{fill:#00FF00;stroke:#42c6ff;stroke-width:1;stroke-miterlimit:10;}
+	.st2{fill:#00FFFF;stroke:#42c6ff;stroke-width:1;stroke-miterlimit:10;}
+	.st3{fill:#FF00FF;stroke:#42c6ff;stroke-width:1;stroke-miterlimit:10;}
+	.st4{fill:#FFFF00;stroke:#42c6ff;stroke-width:1;stroke-miterlimit:10;} -->
 </style>
 <g>
 	<rect x="25" y="37" class="st0" width="50" height="50"/>
 	<polygon class="st0" points="18,40.5 50,5.5 82,40.5 	"/>
 	<rect x="42.5" y="55.5" class="st0" width="15" height="15"/>
-	<rect x="41.5" y="54.5" class="st1" width="8" height="8"/>
+	<!-- <rect x="41.5" y="54.5" class="st1" width="8" height="8"/>
 	<rect x="41.5" y="62.5" class="st2" width="8" height="8"/>
 	<rect x="49.5" y="62.5" class="st3" width="8" height="8"/>
-	<rect x="49.5" y="54.5" class="st4" width="8" height="8"/>
+	<rect x="49.5" y="54.5" class="st4" width="8" height="8"/> -->
 </g>
 </svg>
