@@ -13,7 +13,9 @@ class App extends Component {
     return (
       <div className="full height app">
         <NavBar />
-        {this.state.authenticated ? <Routes /> : <Login />}
+        <div className="container">
+          {this.state.authenticated ? <Routes /> : <Login />}
+        </div>
       </div>
     );
   };
