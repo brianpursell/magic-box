@@ -25,7 +25,6 @@ class Music extends Component {
     axios
       .get('/home')
       .then((response) => {
-        console.log('Response: ', response.data);
         thisHolder.setState({
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
@@ -41,24 +40,31 @@ class Music extends Component {
     this.setState({ gotCreatedSong: false });
   }
 
-  // getVoteData() {
-  //   return axios.get('/votes');
-  // }
-
-  postVoteData(vote) {
+  postVoteData(voteType, vote) {
     axios
-      .post('/votes', { vote })
+      .post('/votes', { voteType, vote })
       .then((res) => {
-        console.log('successful post to /votes => ', res);
-        res.send();
+        res.send(res);
       })
       .catch((err) => {
         throw err;
       });
   }
 
+  // Need to pass down the currentUserId and the songId to the upVote and the downVote methods so the didVote method can be called and the db get queried
+  /*
+, {
+        params: {
+          userId: currentUserId,
+          songId: clickedSongId,
+        },
+      }
+  */
   upVote(e) {
+    const that = this;
     let voteData;
+    const voteType = 'upvote';
+
     axios
       .get('/votes')
       .then((vote) => {
@@ -66,15 +72,57 @@ class Music extends Component {
         return voteData;
       })
       .then((data) => {
-        this.postVoteData(data);
+        this.postVoteData(voteType, data);
+      })
+      .then(() => {
+        axios
+          .get('/music')
+          .then((response) => {
+            that.setState({
+              songsArray: response.data,
+              upVoteCount: response.data.upvotes,
+              downVoteCount: response.data.downvotes,
+            });
+          })
+          .catch((error) => {
+            throw error;
+          });
       })
       .catch((error) => {
         throw error;
       });
   }
 
-  downVote() {
-    // console.log(this, 'DownVote');
+  downVote(e) {
+    const that = this;
+    let voteData;
+    const voteType = 'downvote';
+    axios
+      .get('/votes')
+      .then((vote) => {
+        voteData = vote.data;
+        return voteData;
+      })
+      .then((data) => {
+        this.postVoteData(voteType, data);
+      })
+      .then(() => {
+        axios
+          .get('/music')
+          .then((response) => {
+            that.setState({
+              songsArray: response.data,
+              upVoteCount: response.data.upvotes,
+              downVoteCount: response.data.downvotes,
+            });
+          })
+          .catch((error) => {
+            throw error;
+          });
+      })
+      .catch((error) => {
+        throw error;
+      });
   }
 
   render() {
@@ -84,16 +132,14 @@ class Music extends Component {
           Make Magic
         </button>
         <div className="wrapper" />
-
         {this.state.gotCreatedSong === false ? <Loading /> : null}
-        <SongList
-          upVoteCount={this.state.upVoteCount}
-          downVoteCount={this.state.downVoteCount}
-          songsArray={this.state.songsArray}
-          upVote={this.upVote}
-          downVote={this.downVote}
-          didVote={this.didVote}
-          userId={this.userId}
+        upVoteCount={this.state.upVoteCount}
+        downVoteCount={this.state.downVoteCount}
+        songsArray={this.state.songsArray}
+        upVote={this.upVote}
+        downVote={this.downVote}
+        didVote={this.didVote}
+        userId={this.userId}
         />
       </div>
     );
