@@ -7,11 +7,9 @@ CREATE DATABASE music;
 -- Make the new users table
 CREATE TABLE users
 (
-  ID INTEGER PRIMARY KEY,
+  ID SERIAL PRIMARY KEY,
   username VARCHAR,
-  password VARCHAR,
-  first_name VARCHAR,
-  last_name VARCHAR
+  password VARCHAR
 );
 -- Make the new genres table
 CREATE TABLE genres
@@ -41,11 +39,12 @@ CREATE TABLE votes
 );
 -- Insert Test Users
 INSERT INTO users
-  (id, username, password, first_name, last_name)
+  (username, password)
 VALUES
-  (10, 'j_phillips', '1234', 'Jim Bob', 'Phillips'),
-  (11, 'h_mcgirth', '1234', 'Haygood', 'McGirth'),
-  (12, 'r_mcpickles', '1234', 'Rick', 'McPickles');
+  ('brian', '1234'),
+  ('justin', '1234'),
+  ('josh', '1234'),
+  ('cole', '1234');
 -- Insert Test Genres
 INSERT INTO genres
   (id, name)
@@ -57,21 +56,21 @@ VALUES
 INSERT INTO songs
   (id, user_id, genre_id, artist, title, url, upvotes, downvotes)
 VALUES
-  (1000, 10, 1, 'The Bashing Pythons', 'Big Crumble', 'big_crumble', 3, 10),
-  (1001, 11, 2, 'AI', 'Ending', 'ending', 1000000, 80),
-  (1002, 12, 3, 'Rick Astley', 'flute', 'flute', 500, 10);
+  (1000, 1, 1, 'The Bashing Pythons', 'Big Crumble', 'big_crumble', 3, 10),
+  (1001, 1, 2, 'AI', 'Ending', 'ending', 1000000, 80),
+  (1002, 1, 3, 'Rick Astley', 'flute', 'flute', 500, 10);
 INSERT INTO votes
   (id, user_id, song_id, upvote, downvote)
 VALUES
-  (1, 10, 1000, 1, 0),
-  (2, 11, 1001, 0, 1),
-  (3, 12, 1002, 1, 0),
-  (4, 10, 1001, 1, 0),
-  (5, 10, 1002, 1, 0),
-  (6, 11, 1000, 0, 1),
-  (7, 11, 1002, 0, 1),
-  (8, 12, 1000, 1, 0),
-  (9, 12, 1001, 0, 1);
+  (1, 1, 1000, 1, 0),
+  (2, 1, 1001, 0, 1),
+  (3, 1, 1002, 1, 0),
+  (4, 1, 1001, 1, 0),
+  (5, 1, 1002, 1, 0),
+  (6, 1, 1000, 0, 1),
+  (7, 1, 1002, 0, 1),
+  (8, 1, 1000, 1, 0),
+  (9, 1, 1001, 0, 1);
 
 -- Run the below to get into the database and create a user and database on Ubuntu
 --  sudo service postgresql start
