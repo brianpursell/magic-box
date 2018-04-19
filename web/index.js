@@ -28,7 +28,7 @@ app.post('/signup', (req, res) => {
   });
 });
 
-app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
+app.get(['/', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
   // res.send('what???', 404);
   console.log('called');
   db.load((data) => {
@@ -40,12 +40,18 @@ app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) 
 //   res.send('what???', 404);
 // });
 
+app.get('/music', (req, res) => {
+  // res.send('what???', 404);
+  console.log('called');
+  db.load((data) => {
+    res.send(data.rows);
+  });
+});
+
 //= ====GOTTA FIX USER INFO BELOW WHEN USERS ARE IMPLEMENTED=======
 app.get('/votes', (req, res) => {
   const currentUserId = req.query.currentUserId;
   const clickedSongId = req.query.clickedSongId;
-  console.log('this is the req.body in the GET to votes => ', req.query);
-
   db.didVote(currentUserId, clickedSongId, (data) => {
     res.send(data.rows);
   });
@@ -61,8 +67,8 @@ app.post('/votes', (req, res) => {
   req.on('end', () => {
     console.log('I am the body => ', body);
 
-    db.toggleVote(body, (res) => {
-      console.log('Vote Toggled and heres the response data => ', res);
+    db.toggleVote(body, (response) => {
+      console.log('Vote Toggled and heres the response data => ', response);
     });
   });
 });
