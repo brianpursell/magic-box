@@ -5,7 +5,9 @@ const AudioSnippet = props => (
   <div className="player">
     <audio controls className="AudioPlayer">
       <source
-        src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${props.song.url}.mp3`}
+        src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${
+          props.song.url
+        }.mp3`}
         type="video/mp4"
       />
     </audio>
