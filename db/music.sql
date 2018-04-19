@@ -64,13 +64,7 @@ INSERT INTO votes
 VALUES
   (1, 1, 1000, 1, 0),
   (2, 1, 1001, 0, 1),
-  (3, 1, 1002, 1, 0),
-  (4, 1, 1001, 1, 0),
-  (5, 1, 1002, 1, 0),
-  (6, 1, 1000, 0, 1),
-  (7, 1, 1002, 0, 1),
-  (8, 1, 1000, 1, 0),
-  (9, 1, 1001, 0, 1);
+  (3, 1, 1002, 1, 0);
 
 -- Run the below to get into the database and create a user and database on Ubuntu
 --  sudo service postgresql start
