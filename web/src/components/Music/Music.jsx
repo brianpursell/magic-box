@@ -45,7 +45,6 @@ class Music extends Component {
     axios
       .get('/music')
       .then((response) => {
-        console.log('I am the response from the getRefreshedSongData method => ', response);
         this.setState(
           {
             songsArray: response.data,
@@ -65,9 +64,7 @@ class Music extends Component {
   postVoteData(voteType, vote) {
     axios
       .post('/votes', { voteType, vote })
-      .then((res) => {
-        console.log('I made it to the postVoteData method and here is the result => ', res);
-      })
+      .then((res) => {})
       .catch((err) => {
         throw err;
       });
@@ -77,7 +74,6 @@ class Music extends Component {
     const voteType = 'upvote';
     const clickedSongId = song.id;
     const currentUserId = this.state.userId;
-    console.log('this is the song in the upvote method => ', song);
     axios
       .get('/votes', { params: { clickedSongId, currentUserId } })
       .then((vote) => {
@@ -85,7 +81,6 @@ class Music extends Component {
         return voteData;
       })
       .then((voteData) => {
-        console.log('voteData => ', voteData);
         this.postVoteData(voteType, voteData);
       })
       .then(() => {
@@ -100,7 +95,7 @@ class Music extends Component {
     const voteType = 'downvote';
     const clickedSongId = song.id;
     const currentUserId = this.state.userId;
-    console.log('this is the song in the upvote method => ', song);
+
     axios
       .get('/votes', { params: { clickedSongId, currentUserId } })
       .then((vote) => {
@@ -108,7 +103,6 @@ class Music extends Component {
         return voteData;
       })
       .then((voteData) => {
-        console.log('voteData => ', voteData);
         this.postVoteData(voteType, voteData);
       })
       .then(() => {

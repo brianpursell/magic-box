@@ -30,7 +30,6 @@ app.post('/signup', (req, res) => {
 
 app.get(['/', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
   // res.send('what???', 404);
-  console.log('called');
   db.load((data) => {
     res.send(data.rows);
   });
@@ -51,23 +50,15 @@ app.get('/music', (req, res) => {
 app.get('/votes', (req, res) => {
   const currentUserId = req.query.currentUserId;
   const clickedSongId = req.query.clickedSongId;
+
   db.didVote(currentUserId, clickedSongId, (data) => {
     res.send(data.rows);
   });
 });
 
 app.post('/votes', (req, res) => {
-  console.log('called');
-
-  // let body = '';
-  // req.on('data', (data) => {
-  //   console.log('this is data => ', data);
-  //   body += data;
-  // });
-  console.log('I am the req.body => ', req.body);
   db.toggleVote(req.body, (response) => {
     console.log('Vote Toggled and heres the response data => ', response);
-    res.send(response);
   });
 });
 
