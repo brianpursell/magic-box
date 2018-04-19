@@ -1,3 +1,6 @@
+:root {
+  --main-blue-color: #42c6ff;
+}
 .app {
   flex-direction: row;
   display: flex;
@@ -19,7 +22,7 @@ body,
   height: 100%;
 }
 body {
-  background-color: #42c6ff;
+  background-color: var(--main-bg-color);
   background-image: linear-gradient(135deg, #42c6ff 0%, #ff0081 74%);
 }
 
@@ -86,7 +89,7 @@ body {
   margin-top: 30px;
   margin-left: 130px;
   margin-right: 50%;
-  background-color: #42c6ff;
+  background-color: var(--main-blue-color);
   box-shadow: 0 3px rgba(4, 23, 27, 0.438);
   border-radius: 15px;
 }
@@ -95,7 +98,7 @@ body {
   margin-left: 45%;
   padding-left: 10px;
   position: absolute;
-  color: #42c6ff;
+  color: var(--main-blue-color);
 }
 .player .songName {
   color: white;
@@ -151,7 +154,7 @@ body {
 
 .ui.vertical.menu {
   width: 10rem !important;
-  height: 100%;
+  box-shadow: 1px 0 rgba(4, 23, 27, 0.438) !important;
 }
 
 .item {
@@ -161,14 +164,14 @@ a.item:active {
   transform: translateY(2px);
 }
 a.item:hover {
-  background-color: #42c6ff !important;
+  background-color: var(--main-bg-color) !important;
   background-image: linear-gradient(
     135deg,
-    #42c6ff,
+    var(--main-blue-color),
     #ff0081,
-    #42c6ff,
+    var(--main-blue-color),
     #ff0081,
-    #42c6ff
+    var(--main-blue-color)
   ) !important;
   background-size: 400% 400% !important;
   animation: Gradient 5s ease infinite !important;
@@ -178,8 +181,8 @@ a.item:hover {
   padding-top: 15%;
 }
 
-.ui.menu > .item:first-child {
-  border-radius: 0%;
+.ui.vertical.menu > .item:first-child {
+  border-radius: 0 0 0 0 !important;
 }
 
 .ui.inverted.menu {

@@ -5,7 +5,9 @@ const AudioSnippet = props => (
   <div className="player">
     <audio controls className="AudioPlayer">
       <source
-        src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${props.song.url}.mp3`}
+        src={`https://s3-us-west-2.amazonaws.com/chiptune-magic/${
+          props.song.url
+        }.mp3`}
         type="video/mp4"
       />
     </audio>
@@ -17,7 +19,7 @@ const AudioSnippet = props => (
         song={props.song}
         className="UpVoteArrow"
         src="https://i.imgur.com/8yJfihe.png"
-        onClick={props.upVote}
+        onClick={() => props.upVote(props.song)}
         alt=""
       />
       {props.song.upvotes}
