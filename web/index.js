@@ -42,7 +42,6 @@ app.get(['/', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
 
 app.get('/music', (req, res) => {
   // res.send('what???', 404);
-  console.log('called');
   db.load((data) => {
     res.send(data.rows);
   });
@@ -58,18 +57,17 @@ app.get('/votes', (req, res) => {
 });
 
 app.post('/votes', (req, res) => {
-  let body = '';
-  req.on('data', (data) => {
-    body += data;
-  });
-  // console.log('I am the req.body => ', req.body);
+  console.log('called');
 
-  req.on('end', () => {
-    console.log('I am the body => ', body);
-
-    db.toggleVote(body, (response) => {
-      console.log('Vote Toggled and heres the response data => ', response);
-    });
+  // let body = '';
+  // req.on('data', (data) => {
+  //   console.log('this is data => ', data);
+  //   body += data;
+  // });
+  console.log('I am the req.body => ', req.body);
+  db.toggleVote(req.body, (response) => {
+    console.log('Vote Toggled and heres the response data => ', response);
+    res.send(response);
   });
 });
 

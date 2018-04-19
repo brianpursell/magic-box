@@ -46,11 +46,16 @@ class Music extends Component {
       .get('/music')
       .then((response) => {
         console.log('I am the response from the getRefreshedSongData method => ', response);
-        this.setState({
-          songsArray: response.data,
-          upVoteCount: response.data.upvotes,
-          downVoteCount: response.data.downvotes,
-        });
+        this.setState(
+          {
+            songsArray: response.data,
+            upVoteCount: response.data.upvotes,
+            downVoteCount: response.data.downvotes,
+          },
+          () => {
+            console.log('setState fired and this is the new state => ', this.state);
+          },
+        );
       })
       .catch((error) => {
         throw error;
@@ -58,11 +63,10 @@ class Music extends Component {
   }
 
   postVoteData(voteType, vote) {
-    return axios
+    axios
       .post('/votes', { voteType, vote })
       .then((res) => {
         console.log('I made it to the postVoteData method and here is the result => ', res);
-        res.send(res);
       })
       .catch((err) => {
         throw err;
