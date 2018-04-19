@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import Login from "../../Login.jsx";
+import React, { Component } from 'react';
 
 class Home extends Component {
   state = {};

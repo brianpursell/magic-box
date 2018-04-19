@@ -7,54 +7,77 @@ const client = new pg.Client();
 client
   .connect()
   .then(() => {
-    console.log(`Connected To ${client.database} at ${client.host}:${client.port}`);
+    console.log(
+      `Connected To ${client.database} at ${client.host}:${client.port}`
+    );
   })
   .catch(err => console.error(err));
 
 // get for homepage
-const load = (callback) => {
+const load = callback => {
   client
     .query('SELECT * FROM songs')
-    .then((data) => {
+    .then(data => {
       callback(data);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
     });
 };
 
-const users = (callback) => {
+const findById = (id, callback) => {
+  client
+    .query(`SELECT * FROM users WHERE id = ${id}`)
+    .then(data => {
+      callback(null, data);
+    })
+    .catch(err => {
+      console.error(err, null);
+    });
+};
+
+const findByUsername = (username, callback) => {
+  client
+    .query(`SELECT * FROM users WHERE username = '${username}';`)
+    .then(data => {
+      callback(null, data);
+    })
+    .catch(err => {
+      console.log('err: ', err);
+      callback(err, null);
+    });
+};
+
+const users = callback => {
   client
     .query('SELECT * FROM users')
-    .then((data) => {
+    .then(data => {
       callback(data);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
     });
 };
 
-const signup = (values, callback) => {
-  const query = {
-    text: 'INSERT INTO users (username, password, first_name, last_name) VALUES($1, $2, $3, $4);',
-    values,
-  };
+const signup = (username, password, callback) => {
   client
-    .query(query)
-    .then((res) => {
-      callback(res);
+    .query(
+      `INSERT INTO users (username, password) VALUES('${username}', '${password}');`
+    )
+    .then(success => {
+      callback(null, true);
     })
-    .catch(console.error(err));
+    .catch(err => {
+      callback(err, null);
+    });
 };
 
 const votesQuery = (params, voteId, callback) => {
   client
     .query(`${params} where id = ${voteId};`)
-    .then((data) => {
-      callback(data);
-    })
-    .catch((err) => {
-      console.error(err);
+    .then(console.log('user saved'))
+    .catch(err => {
+      callback(err);
     });
 };
 
@@ -74,7 +97,7 @@ const toggleVote = (vote, callback) => {
       votesQuery(
         'update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end)',
         voteId,
-        callback,
+        callback
       );
     } else if (totalVotes === 0) {
       votesQuery('update votes set upvote = 1', voteId, callback);
@@ -86,7 +109,7 @@ const toggleVote = (vote, callback) => {
       votesQuery(
         'update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end)',
         voteId,
-        callback,
+        callback
       );
     } else if (totalVotes === 0) {
       votesQuery('update votes set downvote = 1', voteId, callback);
@@ -96,11 +119,13 @@ const toggleVote = (vote, callback) => {
 
 const didVote = (currentUserId, clickedSongId, callback) => {
   client
-    .query(`Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId}`)
-    .then((data) => {
+    .query(
+      `Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId}`
+    )
+    .then(data => {
       callback(data);
     })
-    .catch((err) => {
+    .catch(err => {
       console.error(err);
     });
 };
@@ -111,3 +136,5 @@ module.exports.signup = signup;
 module.exports.client = client;
 module.exports.didVote = didVote;
 module.exports.toggleVote = toggleVote;
+module.exports.findByUsername = findByUsername;
+module.exports.findById = findById;
