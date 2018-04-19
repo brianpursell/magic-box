@@ -8,6 +8,7 @@ const SongList = props => (
       <AudioSnippet
         className="player"
         key={index}
+        currentUserId={props.userId}
         song={song}
         upVote={props.upVote}
         upVoteCount={props.upVoteCount}

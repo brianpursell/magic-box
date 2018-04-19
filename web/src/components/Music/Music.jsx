@@ -26,6 +26,7 @@ class Music extends Component {
       .get('/home')
       .then((response) => {
         thisHolder.setState({
+          // currentUserId:
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
           downVoteCount: response.data.downvotes,
@@ -40,88 +41,75 @@ class Music extends Component {
     this.setState({ gotCreatedSong: false });
   }
 
-  postVoteData(voteType, vote) {
+  getRefreshedSongData() {
     axios
-      .post('/votes', { voteType, vote })
-      .then((res) => {
-        res.send(res);
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }
-
-  // Need to pass down the currentUserId and the songId to the upVote and the downVote methods so the didVote method can be called and the db get queried
-  /*
-, {
-        params: {
-          userId: currentUserId,
-          songId: clickedSongId,
-        },
-      }
-  */
-  upVote(e) {
-    console.log('e', e);
-    const that = this;
-    let voteData;
-    const voteType = 'upvote';
-
-    axios
-      .get('/votes')
-      .then((vote) => {
-        voteData = vote.data;
-        return voteData;
-      })
-      .then((data) => {
-        this.postVoteData(voteType, data);
-      })
-      .then(() => {
-        axios
-          .get('/music')
-          .then((response) => {
-            console.log('RESPONSE', response);
-            that.setState({
-              songsArray: response.data,
-              upVoteCount: response.data.upvotes,
-              downVoteCount: response.data.downvotes,
-            });
-          })
-          .catch((error) => {
-            throw error;
-          });
+      .get('/music')
+      .then((response) => {
+        this.setState(
+          {
+            songsArray: response.data,
+            upVoteCount: response.data.upvotes,
+            downVoteCount: response.data.downvotes,
+          },
+          () => {
+            console.log(
+              'setState fired and this is the new state => ',
+              this.state,
+            );
+          },
+        );
       })
       .catch((error) => {
         throw error;
       });
   }
 
-  downVote(e) {
-    const that = this;
-    let voteData;
-    const voteType = 'downvote';
+  postVoteData(voteType, vote) {
     axios
-      .get('/votes')
+      .post('/votes', { voteType, vote })
+      .then((res) => {})
+      .catch((err) => {
+        throw err;
+      });
+  }
+
+  upVote(user, song) {
+    const voteType = 'upvote';
+    const clickedSongId = song.id;
+    const currentUserId = this.state.userId;
+    axios
+      .get('/votes', { params: { clickedSongId, currentUserId } })
       .then((vote) => {
-        voteData = vote.data;
+        const voteData = vote.data;
         return voteData;
       })
-      .then((data) => {
-        this.postVoteData(voteType, data);
+      .then((voteData) => {
+        this.postVoteData(voteType, voteData);
       })
       .then(() => {
-        axios
-          .get('/music')
-          .then((response) => {
-            console.log('then response was called');
-            that.setState({
-              songsArray: response.data,
-              upVoteCount: response.data.upvotes,
-              downVoteCount: response.data.downvotes,
-            });
-          })
-          .catch((error) => {
-            throw error;
-          });
+        this.getRefreshedSongData();
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  downVote(user, song) {
+    const voteType = 'downvote';
+    const clickedSongId = song.id;
+    const currentUserId = this.state.userId;
+
+    axios
+      .get('/votes', { params: { clickedSongId, currentUserId } })
+      .then((vote) => {
+        const voteData = vote.data;
+        return voteData;
+      })
+      .then((voteData) => {
+        this.postVoteData(voteType, voteData);
+      })
+      .then(() => {
+        this.getRefreshedSongData();
       })
       .catch((error) => {
         throw error;
