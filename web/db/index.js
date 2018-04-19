@@ -67,12 +67,16 @@ const signup = (username, password, callback) => {
     .then(success => {
       callback(null, true);
     })
+<<<<<<< HEAD
     .catch(err => {
       callback(err, null);
     });
+=======
+    .catch(err => console.error(err));
+>>>>>>> f0ddb5eb5b2fb8fd9c646128c18667c5e1c5e5b8
 };
 
-const votesQuery = (params, voteId, callback) => {
+const updateVotesQuery = (params, voteId, callback) => {
   client
     .query(`${params} where id = ${voteId};`)
     .then(console.log('user saved'))
@@ -81,38 +85,59 @@ const votesQuery = (params, voteId, callback) => {
     });
 };
 
+const updateSongVotesQuery = (params, songId, callback) => {
+  client
+    .query(`${params} where id = ${songId};`)
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
 const toggleVote = (vote, callback) => {
-  vote = JSON.parse(vote);
+  console.log('vote => ', vote);
+  // vote = JSON.parse(vote);
   const voteType = vote.voteType;
   vote = vote.vote[0];
   const voteId = vote.id;
+  const songId = vote.song_id;
   const upVoteCount = vote.upvote;
   const downVoteCount = vote.downvote;
   const totalVotes = upVoteCount + downVoteCount;
 
   if (voteType === 'upvote') {
     if (totalVotes === 1 && upVoteCount === 1) {
-      votesQuery('update votes set upvote = 0', voteId, callback);
+      updateVotesQuery('update votes set upvote = 0', voteId, callback);
+      updateSongVotesQuery('update songs set upvotes = upvotes - 1', songId, callback);
     } else if (totalVotes === 1 && upVoteCount === 0) {
-      votesQuery(
+      updateVotesQuery(
         'update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end)',
         voteId,
         callback
       );
+      updateSongVotesQuery('update songs set upvotes = upvotes + 1', songId, callback);
+      updateSongVotesQuery('update songs set downvotes = downvotes - 1', songId, callback);
     } else if (totalVotes === 0) {
-      votesQuery('update votes set upvote = 1', voteId, callback);
+      updateVotesQuery('update votes set upvote = 1', voteId, callback);
+      updateSongVotesQuery('update songs set upvotes = upvotes + 1', songId, callback);
     }
   } else if (voteType === 'downvote') {
     if (totalVotes === 1 && downVoteCount === 1) {
-      votesQuery('update votes set downvote = 0', voteId, callback);
+      updateVotesQuery('update votes set downvote = 0', voteId, callback);
+      updateSongVotesQuery('update songs set downvotes = downvotes - 1', songId, callback);
     } else if (totalVotes === 1 && downVoteCount === 0) {
-      votesQuery(
+      updateVotesQuery(
         'update votes set upvote = (case upvote when 1 then 0 when 0 then 1 else upvote end), downvote = (case downvote when 1 then 0 when 0 then 1 else downvote end)',
         voteId,
         callback
       );
+      updateSongVotesQuery('update songs set downvotes = downvotes + 1', songId, callback);
+      updateSongVotesQuery('update songs set upvotes = upvotes - 1', songId, callback);
     } else if (totalVotes === 0) {
-      votesQuery('update votes set downvote = 1', voteId, callback);
+      updateVotesQuery('update votes set downvote = 1', voteId, callback);
+      updateSongVotesQuery('update songs set downvotes = donwvotes + 1', songId, callback);
     }
   }
 };
