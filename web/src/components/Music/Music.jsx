@@ -13,7 +13,7 @@ class Music extends Component {
       upVoteCount: 0,
       downVoteCount: 0,
       didVote: false,
-      userId: 10,
+      userId: 1
     };
     this.makeMagic = this.makeMagic.bind(this);
     this.upVote = this.upVote.bind(this);
@@ -24,15 +24,15 @@ class Music extends Component {
     const thisHolder = this;
     axios
       .get('/home')
-      .then((response) => {
+      .then(response => {
         thisHolder.setState({
           // currentUserId:
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
-          downVoteCount: response.data.downvotes,
+          downVoteCount: response.data.downvotes
         });
       })
-      .catch((error) => {
+      .catch(error => {
         throw error;
       });
   }
@@ -44,22 +44,22 @@ class Music extends Component {
   getRefreshedSongData() {
     axios
       .get('/music')
-      .then((response) => {
+      .then(response => {
         this.setState(
           {
             songsArray: response.data,
             upVoteCount: response.data.upvotes,
-            downVoteCount: response.data.downvotes,
+            downVoteCount: response.data.downvotes
           },
           () => {
             console.log(
               'setState fired and this is the new state => ',
-              this.state,
+              this.state
             );
-          },
+          }
         );
       })
-      .catch((error) => {
+      .catch(error => {
         throw error;
       });
   }
@@ -67,8 +67,8 @@ class Music extends Component {
   postVoteData(voteType, vote) {
     axios
       .post('/votes', { voteType, vote })
-      .then((res) => {})
-      .catch((err) => {
+      .then(res => {})
+      .catch(err => {
         throw err;
       });
   }
@@ -79,17 +79,17 @@ class Music extends Component {
     const currentUserId = this.state.userId;
     axios
       .get('/votes', { params: { clickedSongId, currentUserId } })
-      .then((vote) => {
+      .then(vote => {
         const voteData = vote.data;
         return voteData;
       })
-      .then((voteData) => {
+      .then(voteData => {
         this.postVoteData(voteType, voteData);
       })
       .then(() => {
         this.getRefreshedSongData();
       })
-      .catch((error) => {
+      .catch(error => {
         throw error;
       });
   }
@@ -101,17 +101,17 @@ class Music extends Component {
 
     axios
       .get('/votes', { params: { clickedSongId, currentUserId } })
-      .then((vote) => {
+      .then(vote => {
         const voteData = vote.data;
         return voteData;
       })
-      .then((voteData) => {
+      .then(voteData => {
         this.postVoteData(voteType, voteData);
       })
       .then(() => {
         this.getRefreshedSongData();
       })
-      .catch((error) => {
+      .catch(error => {
         throw error;
       });
   }

@@ -17,6 +17,8 @@ const app = express();
 app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser()); // get information from html forms
+// app.use(bodyParser.json());
+// const jsonParser = bodyParser.json();
 
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
 app.use(passport.initialize());

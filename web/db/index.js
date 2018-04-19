@@ -75,9 +75,11 @@ const signup = (username, password, callback) => {
 const updateVotesQuery = (params, voteId, callback) => {
   client
     .query(`${params} where id = ${voteId};`)
-    .then(console.log('user saved'))
+    .then(data => {
+      callback(data);
+    })
     .catch(err => {
-      callback(err);
+      console.error(err);
     });
 };
 
