@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import Login from "../../Login.jsx";
 
 class Home extends Component {
-  state = {};
+  state = {
+    
+  };
 
   render = () => (
-    <div>
+    <div className='home'>
       <img src='assets/logo.svg' style={{height: 500, width: 500}} />
     </div>
   );

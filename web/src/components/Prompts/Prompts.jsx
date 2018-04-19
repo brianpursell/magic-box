@@ -27,6 +27,7 @@ class Prompts extends Component {
         <div className='ui link cards'>
           {this.state.prompts.map(({title, prompt}) => (
             <Prompt 
+              key={title}
               title={title}
               prompt={prompt}
             />
@@ -39,7 +40,7 @@ class Prompts extends Component {
 }
 
 const Prompt = ({title, prompt}) => (
-  <div className='card'>
+  <div className='card prompt'>
     <span>{title}</span>
     <span>{prompt}</span>
   </div>
