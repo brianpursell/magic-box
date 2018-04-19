@@ -26,6 +26,7 @@ class Music extends Component {
       .get('/home')
       .then((response) => {
         thisHolder.setState({
+          // currentUserId:
           songsArray: response.data,
           upVoteCount: response.data.upvotes,
           downVoteCount: response.data.downvotes,
@@ -40,8 +41,24 @@ class Music extends Component {
     this.setState({ gotCreatedSong: false });
   }
 
-  postVoteData(voteType, vote) {
+  getRefreshedSongData() {
     axios
+      .get('/music')
+      .then((response) => {
+        console.log('I am the response from the getRefreshedSongData method => ', response);
+        that.setState({
+          songsArray: response.data,
+          upVoteCount: response.data.upvotes,
+          downVoteCount: response.data.downvotes,
+        });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }
+
+  postVoteData(voteType, vote) {
+    return axios
       .post('/votes', { voteType, vote })
       .then((res) => {
         res.send(res);
@@ -50,6 +67,8 @@ class Music extends Component {
         throw err;
       });
   }
+
+  // getVoteData(song) {}
 
   // Need to pass down the currentUserId and the songId to the upVote and the downVote methods so the didVote method can be called and the db get queried
   /*
@@ -60,34 +79,21 @@ class Music extends Component {
         },
       }
   */
-  upVote(song) {
+  upVote(user, song) {
     const that = this;
     let voteData;
     const voteType = 'upvote';
-
+    const clickedSongId = song.id;
+    const currentUserId = this.state.userId;
+    console.log('this is the song in the upvote method => ', song);
     axios
-      .get('/votes', { params: { song } })
+      .get('/votes', { params: { clickedSongId, currentUserId } })
       .then((vote) => {
         voteData = vote.data;
-        console.log('I am the voteData in the axios then => ', voteData);
-        return voteData;
-      })
-      .then((data) => {
-        this.postVoteData(voteType, data);
+        this.postVoteData(voteType, voteData);
       })
       .then(() => {
-        axios
-          .get('/music')
-          .then((response) => {
-            that.setState({
-              songsArray: response.data,
-              upVoteCount: response.data.upvotes,
-              downVoteCount: response.data.downvotes,
-            });
-          })
-          .catch((error) => {
-            throw error;
-          });
+        this.getRefreshedSongData();
       })
       .catch((error) => {
         throw error;

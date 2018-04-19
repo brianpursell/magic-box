@@ -42,14 +42,11 @@ app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) 
 
 //= ====GOTTA FIX USER INFO BELOW WHEN USERS ARE IMPLEMENTED=======
 app.get('/votes', (req, res) => {
-  let body = '';
-  req.on('data', (data) => {
-    body += data;
-  });
-  req.on('end', () => {
-    console.log('I am the body in the GET to votes => ', req.body);
-  });
-  db.didVote(10, 1000, (data) => {
+  const currentUserId = req.query.currentUserId;
+  const clickedSongId = req.query.clickedSongId;
+  console.log('this is the req.body in the GET to votes => ', req.query);
+
+  db.didVote(currentUserId, clickedSongId, (data) => {
     res.send(data.rows);
   });
 });
