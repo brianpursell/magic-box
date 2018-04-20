@@ -24,6 +24,38 @@ const load = (callback) => {
       console.error(err);
     });
 };
+const loadSprites = (callback) => {
+  client
+    .query('SELECT * FROM sprites ORDER BY id')
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const loadPrompts = (callback) => {
+  client
+    .query('SELECT * FROM prompts ORDER BY id')
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const loadWorlds = (callback) => {
+  client
+    .query('SELECT * FROM worlds ORDER BY id')
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
 
 const findById = (id, callback) => {
   client
@@ -158,3 +190,6 @@ module.exports.didVote = didVote;
 module.exports.toggleVote = toggleVote;
 module.exports.findByUsername = findByUsername;
 module.exports.findById = findById;
+module.exports.loadSprites = loadSprites;
+module.exports.loadPrompts = loadPrompts;
+module.exports.loadWorlds = loadWorlds;
