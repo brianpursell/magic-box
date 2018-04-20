@@ -93,6 +93,7 @@ app.get('/music', (req, res) => {
 app.get('/votes', (req, res) => {
   const currentUserId = req.query.currentUserId;
   const clickedSongId = req.query.clickedSongId;
+  console.log(req.query);
 
   db.didVote(currentUserId, clickedSongId, (data) => {
     res.send(data.rows);
