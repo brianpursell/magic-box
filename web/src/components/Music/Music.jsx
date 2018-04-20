@@ -23,7 +23,7 @@ class Music extends Component {
   componentDidMount() {
     const thisHolder = this;
     axios
-      .get('/home')
+      .get('/api-music')
       .then((response) => {
         thisHolder.setState({
           // currentUserId:
@@ -43,7 +43,7 @@ class Music extends Component {
 
   getRefreshedSongData() {
     axios
-      .get('/music')
+      .get('/api-music')
       .then((response) => {
         this.setState(
           {

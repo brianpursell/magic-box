@@ -31,7 +31,7 @@ const altGetSongs = callback => {
   client
     .query(
       // 'SELECT * FROM votes'
-      'SELECT *, (SELECT COUNT(*) FROM votes WHERE votes.song_id = songs.id AND votes.vote = true) AS up, (SELECT COUNT(*) FROM votes WHERE votes.song_id = songs.id AND votes.vote = false) AS down FROM songs ORDER BY songs.id'
+      'SELECT *, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = true) AS up, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = false) AS down FROM alt_songs ORDER BY alt_songs.id'
     )
     .then(data => {
       console.log(data);
