@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack | node index.js",
     "react-dev": "webpack -d --watch",
-    "server-dev": "PGHOST=172.18.0.4 PORT=8080 PGUSER=postgres PGDATABASE=music nodemon index.js"
+    "server-dev":
+      "PGHOST=172.18.0.4 PORT=8080 PGUSER=postgres PGDATABASE=music nodemon index.js"
   },
   "author": "Tainted Wolpack",
   "license": "ISC",
@@ -34,7 +35,6 @@
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
-    "connect-flash": "^0.1.1",
     "cookie-parser": "^1.4.3",
     "dotenv": "^5.0.1",
     "eslint": "^4.19.1",
