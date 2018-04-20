@@ -6,6 +6,8 @@ STEPS FOR SETUP
 
 
 =====FOR DEV=====
-1. Cd to web
-2. Run npm run react-dev 
-3. Run npm run server-dev
+1. docker-compose up --build
+2. docker-compose stop web
+3. cd web
+4. npm run server-dev
+5. npm run react-dev

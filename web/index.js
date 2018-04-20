@@ -54,7 +54,7 @@ app.post(
     successRedirect: '/', // redirect to the secure profile section
     failureRedirect: '/', // redirect back to the signup page if there is an error
     failureFlash: true // allow flash messages
-  })
+  }),
 );
 
 app.post(

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack | node index.js",
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon index.js"
+    "server-dev": "PGHOST=172.18.0.4 PORT=8080 PGUSER=postgres PGDATABASE=music nodemon index.js"
   },
   "author": "Tainted Wolpack",
   "license": "ISC",
