@@ -30,8 +30,8 @@ app.get('/logged-in', (req, res) => {
   }
 });
 
-app.get('/home', (req, res) => {
-  db.getSongs(data => {
+app.get('/alt-get-songs', (req, res) => {
+  db.altGetSongs(data => {
     res.send(data.rows);
   });
 });
@@ -78,9 +78,9 @@ app.get('/api-music', (req, res) => {
 
 //= ====GOTTA FIX USER INFO BELOW WHEN USERS ARE IMPLEMENTED=======
 app.get('/votes', (req, res) => {
-  const currentUserId = req.query.currentUserId;
+  const currentUserId = req.user.rows[0].id;
   const clickedSongId = req.query.clickedSongId;
-  console.log(req.query);
+  // console.log(req.query);
 
   db.didVote(currentUserId, clickedSongId, data => {
     res.send(data.rows);

@@ -27,6 +27,21 @@ const getSongs = callback => {
     });
 };
 
+const altGetSongs = callback => {
+  client
+    .query(
+      // 'SELECT * FROM votes'
+      'SELECT *, (SELECT COUNT(*) FROM votes WHERE votes.song_id = songs.id AND votes.vote = true) AS up, (SELECT COUNT(*) FROM votes WHERE votes.song_id = songs.id AND votes.vote = false) AS down FROM songs ORDER BY songs.id'
+    )
+    .then(data => {
+      console.log(data);
+      callback(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
+
 const findById = (id, callback) => {
   client
     .query(`SELECT * FROM users WHERE id = ${id}`)
@@ -189,6 +204,7 @@ const didVote = (currentUserId, clickedSongId, callback) => {
 };
 
 module.exports.getSongs = getSongs;
+module.exports.altGetSongs = altGetSongs;
 module.exports.users = users;
 module.exports.signup = signup;
 module.exports.client = client;
