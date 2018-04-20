@@ -16,7 +16,7 @@ client
 // get for homepage
 const load = callback => {
   client
-    .query('SELECT * FROM songs')
+    .query('SELECT * FROM songs ORDER BY id')
     .then(data => {
       callback(data);
     })
@@ -164,7 +164,7 @@ const toggleVote = (vote, callback) => {
     } else if (totalVotes === 0) {
       updateVotesQuery('update votes set downvote = 1', voteId, callback);
       updateSongVotesQuery(
-        'update songs set downvotes = donwvotes + 1',
+        'update songs set downvotes = downvotes + 1',
         songId,
         callback
       );
