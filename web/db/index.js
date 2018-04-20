@@ -3,7 +3,7 @@ const log = require('node-logger');
 // Need to add local connection details
 const bodyParser = require('body-parser');
 
-console.log('PGHOST: ', process.env.PGHOST)
+console.log('PGHOST: ', process.env.PGHOST);
 
 const client = new pg.Client();
 client
@@ -140,8 +140,9 @@ const toggleVote = (vote, callback) => {
 
 const didVote = (currentUserId, clickedSongId, callback) => {
   client
-    .query(`Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId}`)
+    .query(`Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId};`)
     .then((data) => {
+      console.log('data => ', data);
       callback(data);
     })
     .catch((err) => {
