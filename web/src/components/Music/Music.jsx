@@ -113,9 +113,10 @@ class Music extends Component {
   render() {
     return (
       <div className="MainDiv">
-        <button onClick={this.makeMagic} className="MagicButton">
+        {/* <button onClick={this.makeMagic} className="MagicButton">
           Make Magic
-        </button>
+        </button> */}
+        <div className="page-title">MUSIC</div>
         <div className="wrapper" />
         {this.state.gotCreatedSong === false ? <Loading /> : null}
         <SongList
