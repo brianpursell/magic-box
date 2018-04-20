@@ -1,24 +1,34 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Login extends Component {
   state = {};
 
   render = () => {
     return (
-      <div>
-        <form action="/login" method="post">
-          <div>
-            <label>Username</label>
-            <input type="text" name="username" />
+      <div className="ui inverted segment">
+        <form className="ui inverted form" action="/login" method="post">
+          <div className="equal width fields">
+            <div className="field">
+              <label>Username </label>
+              <div className="ui fluid input">
+                <input type="text" name="username" />
+              </div>
+            </div>
+            <div className="field">
+              <label>Password</label>
+              <div className="ui fluid input">
+                <input type="password" name="password" />
+              </div>
+            </div>
           </div>
-          <div>
-            <label>Password</label>
-            <input type="password" name="password" />
-          </div>
-          <button type="submit">Login</button>
+          <button className="ui white inverted button" type="submit">
+            Login{" "}
+          </button>
         </form>
-        <Link to="/signup">Sign Up</Link>
+        <Link className="SignUp" to="/signup">
+          Sign Up
+        </Link>
       </div>
     );
   };
