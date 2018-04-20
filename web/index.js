@@ -37,13 +37,13 @@ app.get('/logged-in', (req, res) => {
 
 app.get('/home', (req, res) => {
   console.log('got to home');
-  db.load(data => {
+  db.load((data) => {
     res.send(data.rows);
   });
 });
 
 app.get('/users', (req, res) => {
-  db.users(data => {
+  db.users((data) => {
     res.send(data.rows);
   });
 });
@@ -53,8 +53,8 @@ app.post(
   passport.authenticate('local-login', {
     successRedirect: '/', // redirect to the secure profile section
     failureRedirect: '/', // redirect back to the signup page if there is an error
-    failureFlash: true // allow flash messages
-  })
+    failureFlash: true, // allow flash messages
+  }),
 );
 
 app.post(
@@ -62,25 +62,21 @@ app.post(
   passport.authenticate('local-signup', {
     successRedirect: '/', // redirect to the secure profile section
     failureRedirect: '/', // redirect back to the signup page if there is an error
-    failureFlash: true // allow flash messages
-  })
+    failureFlash: true, // allow flash messages
+  }),
 );
 
-app.get('/logout', function(req, res) {
+app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
 
-app.get(
-  ['/', '/music', '/home', '/prompts', '/sprites', '/worlds'],
-  (req, res) => {
-    // res.send('what???', 404);
-    console.log('called');
-    db.load(data => {
-      res.send(data.rows);
-    });
-  }
-);
+app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
+  // res.send('what???', 404);
+  db.load((data) => {
+    res.send(data.rows);
+  });
+});
 
 // app.get('*', (req, res) => {
 //   res.send('what???', 404);
@@ -88,7 +84,7 @@ app.get(
 
 app.get('/music', (req, res) => {
   // res.send('what???', 404);
-  db.load(data => {
+  db.load((data) => {
     res.send(data.rows);
   });
 });
@@ -98,13 +94,13 @@ app.get('/votes', (req, res) => {
   const currentUserId = req.query.currentUserId;
   const clickedSongId = req.query.clickedSongId;
 
-  db.didVote(currentUserId, clickedSongId, data => {
+  db.didVote(currentUserId, clickedSongId, (data) => {
     res.send(data.rows);
   });
 });
 
 app.post('/votes', (req, res) => {
-  db.toggleVote(req.body, response => {
+  db.toggleVote(req.body, (response) => {
     console.log('Vote Toggled and heres the response data => ', response);
   });
 });
