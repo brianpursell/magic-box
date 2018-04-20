@@ -42,6 +42,27 @@ app.get('/users', (req, res) => {
   });
 });
 
+app.get('/sprites', (req, res) => {
+  console.log('got to home');
+  db.loadSprites((data) => {
+    res.send(data.rows);
+  });
+});
+
+app.get('/worlds', (req, res) => {
+  console.log('got to home');
+  db.loadWorlds((data) => {
+    res.send(data.rows);
+  });
+});
+
+app.get('/prompts', (req, res) => {
+  console.log('got to home');
+  db.loadPrompts((data) => {
+    res.send(data.rows);
+  });
+});
+
 app.post(
   '/login',
   passport.authenticate('local-login', {

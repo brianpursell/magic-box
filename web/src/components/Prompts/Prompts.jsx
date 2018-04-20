@@ -1,29 +1,30 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 class Prompts extends Component {
   state = {
     prompts: [
       {
-        title: 'Friend',
-        prompt: "Let's be friends",
+        title: "Friend",
+        prompt: "Let's be friends"
       },
       {
-        title: 'Not friend',
-        prompt: "Let's not be friends",
+        title: "Not friend",
+        prompt: "Let's not be friends"
       },
       {
-        title: 'Maybe friend',
-        prompt: "I'll think about it",
-      },
-    ],
+        title: "Maybe friend",
+        prompt: "I'll think about it"
+      }
+    ]
   };
 
-  componentDidMount = () => console.log('mounting prompts component');
+  componentDidMount = () => console.log("mounting prompts component");
 
   render = () => {
     return (
       <div className="container">
+        <div className="page-title">PROMPTS</div>
         <div className="ui link cards">
           {this.state.prompts.map(({ title, prompt }) => (
             <Prompt key={title} title={title} prompt={prompt} />

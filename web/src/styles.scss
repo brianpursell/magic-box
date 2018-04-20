@@ -193,6 +193,25 @@ a.item:hover {
   border-radius: 0rem !important;
 }
 
+.page-title {
+  padding-top: 55px;
+  padding-bottom: 35px;
+  margin-left: 130px;
+  font-size: 60px;
+  font-weight: 1000;
+  background: linear-gradient(
+    135deg,
+    var(--main-blue-color),
+    #ff0081,
+    var(--main-blue-color),
+    #ff0081
+  );
+  background-size: 600% 600% !important;
+  animation: Gradient 8s ease infinite !important;
+  color: transparent;
+  -webkit-background-clip: text;
+}
+
 /**
 LOGIN
 **/
@@ -212,4 +231,31 @@ label {
 
 .ui.form {
   padding-bottom: 1% !important;
+}
+
+/**
+PROMPTS
+**/
+.container {
+  width: 1000px;
+}
+.ui.cards {
+  margin-top: 15px !important;
+  margin-left: 120px !important;
+}
+.ui.cards a.card,
+.ui.link.card,
+.ui.link.cards .card,
+a.ui.card {
+  width: 30% !important;
+  background-color: var(--main-blue-color) !important;
+  color: white !important;
+  font-size: 26px;
+  box-shadow: 0 3px rgba(4, 23, 27, 0.438);
+  border-radius: 15px;
+}
+span {
+  margin-top: 10px;
+  margin-left: 2%;
+  margin-bottom: 10px;
 }
