@@ -3,6 +3,8 @@ const log = require('node-logger');
 // Need to add local connection details
 const bodyParser = require('body-parser');
 
+console.log('PGHOST: ', process.env.PGHOST)
+
 const client = new pg.Client();
 client
   .connect()
