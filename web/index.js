@@ -73,7 +73,6 @@ app.get('/logout', (req, res) => {
 
 app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
   // res.send('what???', 404);
-  console.log('called');
   db.load((data) => {
     res.send(data.rows);
   });
