@@ -52,7 +52,10 @@ class Music extends Component {
             downVoteCount: response.data.downvotes,
           },
           () => {
-            console.log('setState fired and this is the new state => ', this.state);
+            console.log(
+              'setState fired and this is the new state => ',
+              this.state,
+            );
           },
         );
       })
