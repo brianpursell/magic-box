@@ -14,7 +14,7 @@ client
 // get for homepage
 const load = (callback) => {
   client
-    .query('SELECT * FROM songs')
+    .query('SELECT * FROM songs ORDER BY id')
     .then((data) => {
       callback(data);
     })

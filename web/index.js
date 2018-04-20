@@ -66,6 +66,11 @@ app.post(
   }),
 );
 
+app.get('/logout', (req, res) => {
+  req.logout();
+  res.redirect('/');
+});
+
 app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
   // res.send('what???', 404);
   console.log('called');
