@@ -38,15 +38,15 @@ const getGenres = callback => {
     });
 };
 
-const addSong = (params, filename, callback) => {
+const addSong = (params, userId, filename, callback) => {
   let uid = 1;
   let gid = 1;
   let artist = 'the blahs';
   client
     .query(
-      `INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${uid}', '${gid}', '${artist}', '${
-        params.title
-      }', '${filename}')`
+      `INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${userId}', '${
+        params.genre
+      }', '${params.artist}', '${params.title}', '${filename}')`
     )
     .then(data => {
       callback(null, data);
@@ -264,6 +264,7 @@ const didVote = (currentUserId, clickedSongId, callback) => {
 };
 
 module.exports.addSong = addSong;
+module.exports.getGenres = getGenres;
 module.exports.getSongs = getSongs;
 module.exports.altGetSongs = altGetSongs;
 module.exports.users = users;

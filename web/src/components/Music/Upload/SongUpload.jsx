@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 class SongUpload extends Component {
-  state = {
-    genres: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      genres: []
+    };
+  }
 
   componentDidMount() {
     axios
@@ -20,11 +23,22 @@ class SongUpload extends Component {
   }
 
   render = () => {
+    const genres = this.state.genres.map(genre => (
+      <option key={genre.id} value={genre.id}>
+        {genre.name}
+      </option>
+    ));
     return (
       <div className="ui inverted segment">
         <form action="/upload" method="post" encType="multipart/form-data">
           <div>
             <input type="text" name="title" placeholder="Song title" />
+          </div>
+          <div>
+            <input type="text" name="artist" placeholder="Artist" />
+          </div>
+          <div>
+            <select name="genre">{genres}</select>
           </div>
           <div>
             <input type="file" name="song" multiple />
