@@ -25,40 +25,26 @@ const getSongs = (callback) => {
     });
 };
 
-<<<<<<< HEAD
-const addSong = (params, filename, callback) => {
-  const uid = 1;
-  const gid = 1;
-  const artist = 'the blahs';
-  client
-    .query(`INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${uid}', '${gid}', '${artist}', '${
-      params.title
-    }', '${filename}')`)
-    .then((data) => {
-=======
-const getGenres = callback => {
+const getGenres = (callback) => {
   client
     .query('SELECT * FROM genres ORDER BY name')
-    .then(data => {
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };
 
 const addSong = (params, userId, filename, callback) => {
-  let uid = 1;
-  let gid = 1;
-  let artist = 'the blahs';
+  const uid = 1;
+  const gid = 1;
+  const artist = 'the blahs';
   client
-    .query(
-      `INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${userId}', '${
-        params.genre
-      }', '${params.artist}', '${params.title}', '${filename}')`
-    )
-    .then(data => {
->>>>>>> 6c7c211fdae9af144b2dbc00e15923ea6b86641f
+    .query(`INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${userId}', '${
+      params.genre
+    }', '${params.artist}', '${params.title}', '${filename}')`)
+    .then((data) => {
       callback(null, data);
     })
     .catch((err) => {
