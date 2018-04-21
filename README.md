@@ -28,4 +28,6 @@ STEPS FOR SETUP
 12. Run docker-compose up --build to build all images
 13. Create an elastic container repository- https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories
 14. Follow the instructions of "view push commands" to set up the ability to push docker images
-14. Run ecs-cli compose --file docker-compose.prod.yml --project-name magic-box service up  --create-log-groups
+15. Push all of your images up with tags of their names
+16. Change the image URLs in docker-compose.prod.yml
+17. Run ecs-cli compose --file docker-compose.prod.yml --project-name magic-box service up  --create-log-groups

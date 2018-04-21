@@ -9,6 +9,7 @@ services:
     environment:
       - PROD=true
       - PORT=80
+      - PGHOST=0.0.0.0
     expose: 
       - "80"
     logging:
