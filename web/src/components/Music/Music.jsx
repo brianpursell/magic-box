@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SongList from './SongList/SongList.jsx';
 import Loading from '../Common/Loading.jsx';
+import { Link } from "react-router-dom";
 import '../../styles.scss';
 
 class Music extends Component {
@@ -23,7 +24,7 @@ class Music extends Component {
   componentDidMount() {
     const thisHolder = this;
     axios
-      .get('/home')
+      .get('/api-music')
       .then((response) => {
         thisHolder.setState({
           // currentUserId:
@@ -43,7 +44,7 @@ class Music extends Component {
 
   getRefreshedSongData() {
     axios
-      .get('/music')
+      .get('/api-music')
       .then((response) => {
         this.setState(
           {
@@ -113,6 +114,7 @@ class Music extends Component {
   render() {
     return (
       <div className="MainDiv">
+      <Link to="/song-upload">Upload</Link>
         {/* <button onClick={this.makeMagic} className="MagicButton">
           Make Magic
         </button> */}
