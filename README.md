@@ -26,4 +26,6 @@ STEPS FOR SETUP
 10. Change the ports of the web service in the docker-compose.yml from 8089:8089 to 80:80
 11. Change the ecs-params.yml subnet IDs to the two subnets outputted by step 7, and the security group id to that of the output of step 8
 12. Run docker-compose up --build to build all images
-13. Run ecs-cli compose --file docker-compose.prod.yml --project-name magic-box service up  --create-log-groups
+13. Create an elastic container repository- https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories
+14. Follow the instructions of "view push commands" to set up the ability to push docker images
+14. Run ecs-cli compose --file docker-compose.prod.yml --project-name magic-box service up  --create-log-groups
