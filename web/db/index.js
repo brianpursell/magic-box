@@ -27,6 +27,17 @@ const getSongs = callback => {
     });
 };
 
+const getGenres = callback => {
+  client
+    .query('SELECT * FROM genres ORDER BY name')
+    .then(data => {
+      callback(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
+
 const addSong = (params, filename, callback) => {
   let uid = 1;
   let gid = 1;
