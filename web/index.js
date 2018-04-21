@@ -26,15 +26,15 @@ app.use(passport.session());
 app.use(express.static(`${__dirname}/dist`));
 
 app.post('/upload', (req, res) => {
-  let file = req.files.song;
+  const file = req.files.song;
   AWS.upload(file, (err, data) => {
     if (err) {
       console.log(err);
     } else {
       console.log(data);
-      let nameParts = file.name.split('.');
+      const nameParts = file.name.split('.');
       nameParts.pop();
-      let filename = nameParts.join('.');
+      const filename = nameParts.join('.');
       db.addSong(req.body, req.user.rows[0].id, filename, (err, data) => {
         if (err) {
           console.log(err);
@@ -43,13 +43,14 @@ app.post('/upload', (req, res) => {
         }
       });
     }
+    res.redirect('/music');
     res.end();
   });
 });
 
 app.get('/genres', (req, res) => {
   console.log('getting genres');
-  db.getGenres(data => {
+  db.getGenres((data) => {
     res.send(data.rows);
   });
 });
@@ -63,34 +64,34 @@ app.get('/logged-in', (req, res) => {
 });
 
 app.get('/alt-get-songs', (req, res) => {
-  db.altGetSongs(data => {
+  db.altGetSongs((data) => {
     res.send(data.rows);
   });
 });
 
 app.get('/users', (req, res) => {
-  db.users(data => {
+  db.users((data) => {
     res.send(data.rows);
   });
 });
 
 app.get('/sprites', (req, res) => {
   console.log('got to home');
-  db.loadSprites(data => {
+  db.loadSprites((data) => {
     res.send(data.rows);
   });
 });
 
 app.get('/worlds', (req, res) => {
   console.log('got to home');
-  db.loadWorlds(data => {
+  db.loadWorlds((data) => {
     res.send(data.rows);
   });
 });
 
 app.get('/prompts', (req, res) => {
   console.log('got to home');
-  db.loadPrompts(data => {
+  db.loadPrompts((data) => {
     res.send(data.rows);
   });
 });
@@ -99,16 +100,16 @@ app.post(
   '/login',
   passport.authenticate('local-login', {
     successRedirect: '/',
-    failureRedirect: '/'
-  })
+    failureRedirect: '/',
+  }),
 );
 
 app.post(
   '/signup',
   passport.authenticate('local-signup', {
     successRedirect: '/',
-    failureRedirect: '/'
-  })
+    failureRedirect: '/',
+  }),
 );
 
 app.get('/logout', (req, res) => {
@@ -116,15 +117,12 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-app.get(
-  ['/', '/music', '/home', '/prompts', '/sprites', '/worlds'],
-  (req, res) => {
-    res.redirect('/');
-  }
-);
+app.get(['/', '/music', '/home', '/prompts', '/sprites', '/worlds'], (req, res) => {
+  res.redirect('/');
+});
 
 app.get('/api-music', (req, res) => {
-  db.getSongs(data => {
+  db.getSongs((data) => {
     res.send(data.rows);
   });
 });
@@ -133,15 +131,17 @@ app.get('/api-music', (req, res) => {
 app.get('/votes', (req, res) => {
   const currentUserId = req.user.rows[0].id;
   const clickedSongId = req.query.clickedSongId;
-  // console.log(req.query);
+  const voteType = req.query.voteType;
+  // console.log('req.query in the server => ', req.query);
 
-  db.didVote(currentUserId, clickedSongId, data => {
+  db.didVote(currentUserId, clickedSongId, voteType, (data) => {
+    console.log('data.rows in the server => ', data.rows);
     res.send(data.rows);
   });
 });
 
 app.post('/votes', (req, res) => {
-  db.toggleVote(req.body, response => {
+  db.toggleVote(req.body, (response) => {
     console.log('Vote Toggled and heres the response data => ', response);
   });
 });

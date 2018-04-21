@@ -13,6 +13,6 @@ CREATE TABLE prompts
 INSERT INTO prompts
   (title, prompt_name)
 VALUES
-  ('Friend', 'Let\''s be friends'),
-  ('Not Friend', 'Let\''s not be friends'),
-  ('Maybe Friend', 'I\''ll think about it');
+  ('Friend', 'Let''s be friends'),
+  ('Not Friend', 'Let''s not be friends'),
+  ('Maybe Friend', 'I''ll think about it');

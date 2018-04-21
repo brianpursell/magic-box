@@ -53,10 +53,7 @@ class Music extends Component {
             downVoteCount: response.data.downvotes,
           },
           () => {
-            console.log(
-              'setState fired and this is the new state => ',
-              this.state,
-            );
+            console.log('setState fired and this is the new state => ', this.state);
           },
         );
       })
@@ -79,9 +76,10 @@ class Music extends Component {
     const clickedSongId = song.id;
     const currentUserId = this.state.userId;
     axios
-      .get('/votes', { params: { clickedSongId, currentUserId } })
+      .get('/votes', { params: { clickedSongId, currentUserId, voteType } })
       .then((vote) => {
         const voteData = vote.data;
+        console.log('voteData => ', voteData);
         this.postVoteData(voteType, voteData);
       })
       .then(() => {
@@ -98,7 +96,7 @@ class Music extends Component {
     const currentUserId = this.state.userId;
 
     axios
-      .get('/votes', { params: { clickedSongId, currentUserId } })
+      .get('/votes', { params: { clickedSongId, currentUserId, voteType } })
       .then((vote) => {
         const voteData = vote.data;
         this.postVoteData(voteType, voteData);
