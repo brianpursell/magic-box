@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Sprites extends Component {
   state = {
@@ -6,15 +7,21 @@ class Sprites extends Component {
       {
         title: "Warioni",
         creator: "probablyNotCole",
-        spritesheetUrl: "notaurl"
+        spritesheet_url: "notaurl"
       },
       {
         title: "Walethargy",
         creator: "definitelyCole",
-        spritesheetUrl: "notaurl"
+        spritesheet_url: "notaurl"
       }
     ]
   };
+
+  componentDidMount = () => {
+    axios.get('/sprites')
+      .then(sprites => this.setState({sprites: sprites.data}))
+      .catch(err => console.error(err));
+  }
 
   render = () => {
     return (
@@ -23,9 +30,10 @@ class Sprites extends Component {
         <div className="ui link cards">
           {this.state.sprites.map(sprite => (
             <Sprite
+              key={sprite.title}
               title={sprite.title}
               creator={sprite.creator}
-              spritesheetUrl={sprite.spritesheetUrl}
+              spritesheetUrl={sprite.spritesheet_url}
             />
           ))}
         </div>

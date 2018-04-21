@@ -25,6 +25,7 @@ const getSongs = (callback) => {
     });
 };
 
+<<<<<<< HEAD
 const addSong = (params, filename, callback) => {
   const uid = 1;
   const gid = 1;
@@ -34,6 +35,30 @@ const addSong = (params, filename, callback) => {
       params.title
     }', '${filename}')`)
     .then((data) => {
+=======
+const getGenres = callback => {
+  client
+    .query('SELECT * FROM genres ORDER BY name')
+    .then(data => {
+      callback(data);
+    })
+    .catch(err => {
+      console.error(err);
+    });
+};
+
+const addSong = (params, userId, filename, callback) => {
+  let uid = 1;
+  let gid = 1;
+  let artist = 'the blahs';
+  client
+    .query(
+      `INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${userId}', '${
+        params.genre
+      }', '${params.artist}', '${params.title}', '${filename}')`
+    )
+    .then(data => {
+>>>>>>> 6c7c211fdae9af144b2dbc00e15923ea6b86641f
       callback(null, data);
     })
     .catch((err) => {
@@ -211,6 +236,7 @@ const didVote = (currentUserId, clickedSongId, callback) => {
 };
 
 module.exports.addSong = addSong;
+module.exports.getGenres = getGenres;
 module.exports.getSongs = getSongs;
 module.exports.altGetSongs = altGetSongs;
 module.exports.users = users;
