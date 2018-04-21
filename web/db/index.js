@@ -209,12 +209,45 @@ const toggleVote = (vote, callback) => {
   }
 };
 
-const didVote = (currentUserId, clickedSongId, callback) => {
+const getVotesForCurrentUser = (currentUserId, clickedSongId, voteType, callback) => {
+  client
+    .query(`Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId};`)
+    .then((data) => {
+      callback(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const insertNewVoteRecord = (userId, songId, voteType, callback) => {
+  client
+    .query(`insert into votes  (user_id, song_id, upvote, downvote) values (${userId}, ${songId}, 0, 0);`)
+    .then((insertResponse) => {
+      callback(insertResponse);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+};
+
+const didVote = (currentUserId, clickedSongId, voteType, callback) => {
   client
     .query(`Select * from votes where votes.user_id = ${currentUserId} and votes.song_id = ${clickedSongId};`)
     .then((data) => {
       console.log('data => ', data);
-      callback(data);
+      if (!data.rowCount) {
+        insertNewVoteRecord(currentUserId, clickedSongId, voteType, (responseData) => {
+          console.log('Successful insertion of new vote => ', responseData);
+        });
+      } else {
+        callback(data);
+      }
+    })
+    .then(() => {
+      getVotesForCurrentUser(currentUserId, clickedSongId, voteType, (voteResponse) => {
+        console.log('getVotesForCurrentUser response => ', voteResponse);
+      });
     })
     .catch((err) => {
       console.error(err);

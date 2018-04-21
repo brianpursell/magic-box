@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SongList from './SongList/SongList.jsx';
 import Loading from '../Common/Loading.jsx';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import '../../styles.scss';
 
 class Music extends Component {
@@ -53,10 +53,7 @@ class Music extends Component {
             downVoteCount: response.data.downvotes,
           },
           () => {
-            console.log(
-              'setState fired and this is the new state => ',
-              this.state,
-            );
+            console.log('setState fired and this is the new state => ', this.state);
           },
         );
       })
@@ -79,7 +76,7 @@ class Music extends Component {
     const clickedSongId = song.id;
     const currentUserId = this.state.userId;
     axios
-      .get('/votes', { params: { clickedSongId, currentUserId } })
+      .get('/votes', { params: { clickedSongId, currentUserId, voteType } })
       .then((vote) => {
         const voteData = vote.data;
         this.postVoteData(voteType, voteData);
@@ -98,7 +95,7 @@ class Music extends Component {
     const currentUserId = this.state.userId;
 
     axios
-      .get('/votes', { params: { clickedSongId, currentUserId } })
+      .get('/votes', { params: { clickedSongId, currentUserId, voteType } })
       .then((vote) => {
         const voteData = vote.data;
         this.postVoteData(voteType, voteData);
@@ -114,7 +111,7 @@ class Music extends Component {
   render() {
     return (
       <div className="MainDiv">
-      <Link to="/song-upload">Upload</Link>
+        <Link to="/song-upload">Upload</Link>
         {/* <button onClick={this.makeMagic} className="MagicButton">
           Make Magic
         </button> */}
