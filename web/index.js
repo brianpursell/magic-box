@@ -9,11 +9,13 @@ const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const AWS = require('./config/aws');
+const fileUpload = require('express-fileupload');
 
 require('./config/passport')(passport);
 
 const app = express();
 
+app.use(fileUpload());
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(bodyParser());
@@ -23,16 +25,28 @@ app.use(passport.session());
 
 app.use(express.static(`${__dirname}/dist`));
 
-app.get('/upload', (req, res) => {
-  AWS.upload((err, data) => {
+app.post('/upload', (req, res) => {
+  let file = req.files.song;
+  AWS.upload(file, (err, data) => {
     if (err) {
       console.log(err);
     } else {
       console.log(data);
+      let nameParts = file.name.split('.');
+      nameParts.pop();
+      let filename = nameParts.join('.');
+      console.log(filename);
+      db.addSong(req.body, filename, (err, data) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('added song to db');
+        }
+      });
     }
     res.end();
-  })
-})
+  });
+});
 
 app.get('/logged-in', (req, res) => {
   if (req.user) {
@@ -56,21 +70,21 @@ app.get('/users', (req, res) => {
 
 app.get('/sprites', (req, res) => {
   console.log('got to home');
-  db.loadSprites((data) => {
+  db.loadSprites(data => {
     res.send(data.rows);
   });
 });
 
 app.get('/worlds', (req, res) => {
   console.log('got to home');
-  db.loadWorlds((data) => {
+  db.loadWorlds(data => {
     res.send(data.rows);
   });
 });
 
 app.get('/prompts', (req, res) => {
   console.log('got to home');
-  db.loadPrompts((data) => {
+  db.loadPrompts(data => {
     res.send(data.rows);
   });
 });
