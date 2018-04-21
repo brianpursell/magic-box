@@ -15,10 +15,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-ENV PORT=8089
 ENV PGHOST=db
 ENV PGUSER=postgres
 ENV PGDATABASE=eight_bit
-EXPOSE 8089
 CMD ["npm", "install"]
 CMD ["npm", "start"]
