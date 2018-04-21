@@ -35,8 +35,7 @@ app.post('/upload', (req, res) => {
       let nameParts = file.name.split('.');
       nameParts.pop();
       let filename = nameParts.join('.');
-      console.log(filename);
-      db.addSong(req.body, filename, (err, data) => {
+      db.addSong(req.body, req.user.rows[0].id, filename, (err, data) => {
         if (err) {
           console.log(err);
         } else {
@@ -45,6 +44,13 @@ app.post('/upload', (req, res) => {
       });
     }
     res.end();
+  });
+});
+
+app.get('/genres', (req, res) => {
+  console.log('getting genres');
+  db.getGenres(data => {
+    res.send(data.rows);
   });
 });
 
