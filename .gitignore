@@ -3,3 +3,4 @@ web/package-lock.json
 .env
 web/dist/bundle.js
 */package-lock.json
+.aws
