@@ -8,6 +8,7 @@ const passport = require('passport');
 const morgan = require('morgan');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const AWS = require('./config/aws');
 
 require('./config/passport')(passport);
 
@@ -21,6 +22,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(express.static(`${__dirname}/dist`));
+
+app.get('/upload', (req, res) => {
+  AWS.upload((err, data) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(data);
+    }
+    res.end();
+  })
+})
 
 app.get('/logged-in', (req, res) => {
   if (req.user) {

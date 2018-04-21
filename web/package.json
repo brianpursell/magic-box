@@ -6,8 +6,7 @@
   "scripts": {
     "start": "webpack | node index.js",
     "react-dev": "webpack -d --watch",
-    "server-dev":
-      "PGHOST=172.18.0.4 PORT=8080 PGUSER=postgres PGDATABASE=music nodemon index.js"
+    "server-dev": "PGHOST=172.18.0.4 PORT=8080 PGUSER=postgres PGDATABASE=music nodemon index.js"
   },
   "author": "Tainted Wolpack",
   "license": "ISC",
@@ -32,6 +31,7 @@
   },
   "dependencies": {
     "animejs": "^2.2.0",
+    "aws-sdk": "^2.226.1",
     "axios": "^0.18.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
@@ -45,6 +45,7 @@
     "method-override": "^2.3.10",
     "morgan": "^1.9.0",
     "node-logger": "0.0.1",
+    "node-uuid": "^1.4.8",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
