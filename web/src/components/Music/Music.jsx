@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SongList from './SongList/SongList.jsx';
 import Loading from '../Common/Loading.jsx';
+import { Link } from "react-router-dom";
 import '../../styles.scss';
 
 class Music extends Component {
@@ -23,7 +24,7 @@ class Music extends Component {
   componentDidMount() {
     const thisHolder = this;
     axios
-      .get('/home')
+      .get('/api-music')
       .then((response) => {
         thisHolder.setState({
           // currentUserId:
@@ -43,7 +44,7 @@ class Music extends Component {
 
   getRefreshedSongData() {
     axios
-      .get('/music')
+      .get('/api-music')
       .then((response) => {
         this.setState(
           {
@@ -52,7 +53,10 @@ class Music extends Component {
             downVoteCount: response.data.downvotes,
           },
           () => {
-            console.log('setState fired and this is the new state => ', this.state);
+            console.log(
+              'setState fired and this is the new state => ',
+              this.state,
+            );
           },
         );
       })
@@ -110,9 +114,11 @@ class Music extends Component {
   render() {
     return (
       <div className="MainDiv">
-        <button onClick={this.makeMagic} className="MagicButton">
+      <Link to="/song-upload">Upload</Link>
+        {/* <button onClick={this.makeMagic} className="MagicButton">
           Make Magic
-        </button>
+        </button> */}
+        <div className="page-title">MUSIC</div>
         <div className="wrapper" />
         {this.state.gotCreatedSong === false ? <Loading /> : null}
         <SongList

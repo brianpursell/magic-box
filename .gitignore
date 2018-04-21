@@ -2,5 +2,9 @@ node_modules/
 web/package-lock.json
 .env
 web/dist/bundle.js
+<<<<<<< HEAD
 */package-lock.json
 */node_modules/
+=======
+*/package-lock.json
+>>>>>>> 48dffde0af72afdb9cc89e9e591c5d2b67bd1dbc

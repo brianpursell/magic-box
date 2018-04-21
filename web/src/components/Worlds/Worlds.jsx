@@ -1,22 +1,23 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Worlds extends Component {
   state = {
     worlds: [
       {
-        title: 'cole\'s basement',
-        creator: 'probablyCole',
-        worldMapUrl: 'notaurl'
+        title: "cole's basement",
+        creator: "probablyCole",
+        worldMapUrl: "notaurl"
       }
     ]
-  }
+  };
 
   render = () => {
     return (
-      <div className='container'>
-        <div className='ui link cards'>
+      <div className="container">
+        <div className="page-title">WORLDS</div>
+        <div className="ui link cards">
           {this.state.worlds.map(world => (
-            <World 
+            <World
               title={world.title}
               creator={world.creator}
               worldMapUrl={world.worldMapUrl}
@@ -25,11 +26,11 @@ class Worlds extends Component {
         </div>
       </div>
     );
-  }
+  };
 }
 
-const World = ({title, creator, worldMapUrl}) => (
-  <div className='card'>
+const World = ({ title, creator, worldMapUrl }) => (
+  <div className="card">
     <span>{title}</span>
     <span>{creator}</span>
     <span>{worldMapUrl}</span>
