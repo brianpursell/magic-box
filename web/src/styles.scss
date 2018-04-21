@@ -8,10 +8,6 @@
   background-color: #edf7f7;
 }
 
-.sidenav {
-  background-color: black;
-}
-
 .main-row {
   height: 100%;
 }
@@ -20,49 +16,6 @@ html,
 body,
 #app {
   height: 100%;
-}
-body {
-  background-color: var(--main-bg-color);
-  background-image: linear-gradient(135deg, #42c6ff 0%, #ff0081 74%);
-}
-
-.MainDiv {
-  width: 1000px;
-}
-
-.MagicButton {
-  margin-top: 75px;
-  margin-left: 130px;
-  margin-right: 20%;
-  height: 50px;
-  width: 15%;
-  box-shadow: 0 3px rgba(4, 23, 27, 0.438);
-  outline: none;
-  color: white;
-  text-align: center;
-  border-radius: 15px;
-  background: linear-gradient(-45deg, #ff0081, #b621fe, #1fd1f9, #f4d63f);
-  background-size: 400% 400%;
-  animation: Gradient 5s ease infinite;
-}
-// Got from https://codepen.io/juliangarnier/pen/rGjMyW, just changed CSS styles, duration and numberOfEls
-.wrapper {
-  position: absolute;
-  top: 9%;
-  margin-left: 25%;
-  width: 300px;
-  display: flex;
-  align-items: center;
-  width: 1px;
-  height: 20px;
-}
-.el {
-  position: absolute;
-  opacity: 1;
-  width: 2px;
-  height: 20px;
-  transform-origin: 50% 100%;
-  //background: white;
 }
 
 @keyframes Gradient {
@@ -84,7 +37,7 @@ body {
 
 .player {
   height: 130px;
-  width: 60%;
+  width: 600px;
   position: relative;
   margin-top: 30px;
   margin-left: 130px;
@@ -258,4 +211,59 @@ span {
   margin-top: 10px;
   margin-left: 2%;
   margin-bottom: 10px;
+}
+
+$colors: #b621fe, #1fd1f9, #b621fe, #1fd1f9;
+
+.home {
+  height: 100%;
+  width: -webkit-fill-available;
+  background-image: linear-gradient(
+    -45deg,
+    #b621fe,
+    #1fd1f9,
+    #ff0081,
+    #b621fe,
+    #1fd1f9,
+    #ff0081
+  ) !important;
+  background-size: 800% 400%;
+  animation: Gradient 10s ease infinite;
+  font: 10em/1 sans-serif;
+}
+
+.text--line {
+  font-size: 1em;
+}
+
+svg {
+  position: absolute;
+  height: 100%;
+}
+
+$max: 4;
+$stroke-step: 10%;
+.text-copy {
+  fill: none;
+  stroke: #e61d8c;
+  stroke-dasharray: $stroke-step $stroke-step * ($max - 1);
+  stroke-width: 3px;
+  animation: stroke-offset 5s;
+  animation-fill-mode: both, forwards, none;
+
+  @for $item from 1 through $max {
+    $stroke-color: nth($colors, $item);
+
+    &:nth-child(#{$item}) {
+      stroke: $stroke-color;
+      stroke-dashoffset: $stroke-step * $item;
+    }
+  }
+}
+
+@keyframes stroke-offset {
+  0% {
+    stroke-dashoffset: $stroke-step * $max;
+    stroke-dasharray: $stroke-step * $max * 2.5;
+  }
 }
