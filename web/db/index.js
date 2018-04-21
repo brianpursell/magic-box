@@ -25,39 +25,26 @@ const getSongs = (callback) => {
     });
 };
 
-<<<<<<< HEAD
-const altGetSongs = (callback) => {
-  client
-    .query(
-      // 'SELECT * FROM votes'
-      'SELECT *, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = true) AS up, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = false) AS down FROM alt_songs ORDER BY alt_songs.id')
-    .then((data) => {
-=======
 const addSong = (params, filename, callback) => {
-  let uid = 1;
-  let gid = 1;
-  let artist = 'the blahs';
+  const uid = 1;
+  const gid = 1;
+  const artist = 'the blahs';
   client
-    .query(
-      `INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${uid}', '${gid}', '${artist}', '${
-        params.title
-      }', '${filename}')`
-    )
-    .then(data => {
+    .query(`INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${uid}', '${gid}', '${artist}', '${
+      params.title
+    }', '${filename}')`)
+    .then((data) => {
       callback(null, data);
     })
-    .catch(err => {
+    .catch((err) => {
       callback(err, null);
     });
 };
 
-const altGetSongs = callback => {
+const altGetSongs = (callback) => {
   client
-    .query(
-      'SELECT *, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = true) AS up, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = false) AS down FROM alt_songs ORDER BY alt_songs.id'
-    )
-    .then(data => {
->>>>>>> 48dffde0af72afdb9cc89e9e591c5d2b67bd1dbc
+    .query('SELECT *, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = true) AS up, (SELECT COUNT(*) FROM alt_votes WHERE alt_votes.song_id = alt_songs.id AND alt_votes.vote = false) AS down FROM alt_songs ORDER BY alt_songs.id')
+    .then((data) => {
       console.log(data);
       callback(data);
     })
@@ -65,35 +52,35 @@ const altGetSongs = callback => {
       console.error(err);
     });
 };
-const loadSprites = callback => {
+const loadSprites = (callback) => {
   client
     .query('SELECT * FROM sprites ORDER BY id')
-    .then(data => {
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };
 
-const loadPrompts = callback => {
+const loadPrompts = (callback) => {
   client
     .query('SELECT * FROM prompts ORDER BY id')
-    .then(data => {
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };
 
-const loadWorlds = callback => {
+const loadWorlds = (callback) => {
   client
     .query('SELECT * FROM worlds ORDER BY id')
-    .then(data => {
+    .then((data) => {
       callback(data);
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
     });
 };
