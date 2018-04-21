@@ -12,8 +12,8 @@ CREATE TABLE worlds
 );
 
 -- Insert Test Genres
-INSERT INTO sprites
-  (title, creator, creator_id, spritesheet_url)
+INSERT INTO worlds
+  (title, creator, creator_id, world_map_url)
 VALUES
   ('Cole\''s Basement', 'cole', (SELECT id from users WHERE username='cole'), 'madeupurlthatsnotaurl6'),
   ('Tom Waits Basement', 'brian', (SELECT id from users WHERE username='brian'), 'madeupurlthatsnotaurl8'),
