@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React, { Component } from "react";
+import axios from "axios";
 
 class SongUpload extends Component {
   constructor(props) {
@@ -11,7 +11,7 @@ class SongUpload extends Component {
 
   componentDidMount() {
     axios
-      .get('/genres')
+      .get("/genres")
       .then(res => {
         this.setState({
           genres: res.data
@@ -29,22 +29,24 @@ class SongUpload extends Component {
       </option>
     ));
     return (
-      <div className="ui inverted segment">
+      <div className="ui inverted segment" className="upload-container">
         <form action="/upload" method="post" encType="multipart/form-data">
-          <div>
+          <div className="ui fluid input">
             <input type="text" name="title" placeholder="Song title" />
           </div>
-          <div>
+          <div className="ui fluid input">
             <input type="text" name="artist" placeholder="Artist" />
           </div>
           <div>
-            <select name="genre">{genres}</select>
+            <select className="ui item simple dropdown" name="genre">
+              {genres}
+            </select>
           </div>
           <div>
             <input type="file" name="song" multiple />
           </div>
           <div>
-            <button>Submit</button>
+            <button className="upload ui white inverted button">Submit</button>
           </div>
         </form>
       </div>
