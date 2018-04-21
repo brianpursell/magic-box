@@ -170,7 +170,7 @@ LOGIN
 **/
 .ui.inverted.segment {
   background-color: var(--main-blue-color) !important;
-  height: 160px;
+  height: 165px;
   width: 40%;
   top: 15%;
   left: 130px;
@@ -213,11 +213,11 @@ span {
   margin-bottom: 10px;
 }
 
-$colors: #b621fe, #1fd1f9, #b621fe, #1fd1f9;
+$colors: #01ff00, #fcf895, #01ff00, #fcf895;
 
 .home {
   height: 100%;
-  width: -webkit-fill-available;
+  width: 100%;
   background-image: linear-gradient(
     -45deg,
     #b621fe,
@@ -229,7 +229,7 @@ $colors: #b621fe, #1fd1f9, #b621fe, #1fd1f9;
   ) !important;
   background-size: 800% 400%;
   animation: Gradient 10s ease infinite;
-  font: 10em/1 sans-serif;
+  font: 5.5vw/1 sans-serif;
 }
 
 .text--line {
@@ -244,12 +244,11 @@ svg {
 $max: 4;
 $stroke-step: 10%;
 .text-copy {
-  fill: none;
-  stroke: #e61d8c;
+  fill: transparent !important;
+  stroke: #13fca6;
   stroke-dasharray: $stroke-step $stroke-step * ($max - 1);
-  stroke-width: 3px;
+  stroke-width: 2px;
   animation: stroke-offset 5s;
-  animation-fill-mode: both, forwards, none;
 
   @for $item from 1 through $max {
     $stroke-color: nth($colors, $item);
@@ -264,6 +263,47 @@ $stroke-step: 10%;
 @keyframes stroke-offset {
   0% {
     stroke-dashoffset: $stroke-step * $max;
-    stroke-dasharray: $stroke-step * $max * 2.5;
+    stroke-dasharray: $stroke-step * $max * 1.5;
   }
+}
+
+/**
+UPLOAD
+**/
+.upload-text {
+  margin-top: 65px;
+  margin-left: 635px;
+  font-size: 30px;
+  position: absolute;
+}
+.ui.input > input {
+  max-width: 300px !important;
+  margin-left: 20px;
+  margin-top: 17px;
+  box-shadow: 0 2px rgba(4, 23, 27, 0.438);
+}
+.upload-container {
+  background-color: var(--main-blue-color) !important;
+  width: 40%;
+  height: 265px;
+  top: 145px;
+  left: 230px;
+  position: absolute;
+  box-shadow: 0 3px rgba(4, 23, 27, 0.438) !important;
+  border-radius: 15px;
+}
+select.ui.dropdown {
+  margin-left: 20px;
+  margin-top: 15px;
+}
+button,
+input {
+  overflow: visible;
+  margin-left: 20px;
+  margin-top: 17px;
+  border-radius: 15px;
+}
+.upload.ui.inverted.button {
+  margin-left: 20px;
+  margin-top: 15px;
 }

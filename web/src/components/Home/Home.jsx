@@ -7,9 +7,9 @@ class Home extends Component {
   render = () => (
     <div className="home">
       {/* <img src='assets/logo.svg' style={{height: 500, width: 500}} /> */}
-      <svg viewBox="0 0 800 600">
+      <svg viewBox="0 0 850 600">
         <symbol id="s-text">
-          <text textAnchor="middle" x="50%" y="35%" className="text--line">
+          <text x="1%" y="25%" className="text--line">
             Welcome
           </text>
         </symbol>
