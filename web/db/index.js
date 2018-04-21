@@ -41,9 +41,9 @@ const addSong = (params, userId, filename, callback) => {
   const gid = 1;
   const artist = 'the blahs';
   client
-    .query(`INSERT INTO songs (user_id, genre_id, artist, title, url) VALUES('${userId}', '${
+    .query(`INSERT INTO songs (user_id, genre_id, artist, title, url, upvotes, downvotes) VALUES('${userId}', '${
       params.genre
-    }', '${params.artist}', '${params.title}', '${filename}')`)
+    }', '${params.artist}', '${params.title}', '${filename}', 0, 0)`)
     .then((data) => {
       callback(null, data);
     })

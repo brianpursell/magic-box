@@ -79,6 +79,7 @@ class Music extends Component {
       .get('/votes', { params: { clickedSongId, currentUserId, voteType } })
       .then((vote) => {
         const voteData = vote.data;
+        console.log('voteData => ', voteData);
         this.postVoteData(voteType, voteData);
       })
       .then(() => {
