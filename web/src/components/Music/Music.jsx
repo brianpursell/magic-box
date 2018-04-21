@@ -112,7 +112,9 @@ class Music extends Component {
   render() {
     return (
       <div className="MainDiv">
-        <Link to="/song-upload">Upload</Link>
+        <Link to="/song-upload" className="upload-text">
+          Upload
+        </Link>
         {/* <button onClick={this.makeMagic} className="MagicButton">
           Make Magic
         </button> */}
