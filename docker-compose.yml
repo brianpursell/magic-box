@@ -2,6 +2,7 @@ version: "2"
 services:
   web:
     build: "./web"
+    image: "magic-box/web"
     ports:
       - "8089:8089"
     depends_on:
@@ -9,21 +10,26 @@ services:
   db:
     restart: "always"
     build: "./db"
+    image: "magic-box/db"
     ports:
       - "6000:5432"
   music:
     build: "./music"
+    image: "magic-box/music"
     ports: 
       - "8081:8081"
   prompts:
     build: "./prompts"
+    image: "magic-box/prompts"
     ports:
       - "8082:8082"
   sprites: 
     build: "./sprites"
+    image: "magic-box/sprites"
     ports: 
       - "8083:8083"
   worlds: 
     build: "./worlds"
+    image: "magic-box/worlds"
     ports: 
       - "8084:8084"

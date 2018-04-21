@@ -6,28 +6,36 @@ class Prompts extends Component {
     prompts: [
       {
         title: "Friend",
-        prompt: "Let's be friends"
+        prompt_name: "Let's be friends"
       },
       {
         title: "Not friend",
-        prompt: "Let's not be friends"
+        prompt_name: "Let's not be friends"
       },
       {
         title: "Maybe friend",
-        prompt: "I'll think about it"
+        prompt_name: "I'll think about it"
       }
     ]
   };
 
-  componentDidMount = () => console.log("mounting prompts component");
+  componentDidMount = () => {
+    axios.get('/prompts')
+    .then(prompts => this.setState({prompts: prompts.data}))
+      .catch(err => console.error(err));
+  }
 
   render = () => {
     return (
       <div className="container">
         <div className="page-title">PROMPTS</div>
         <div className="ui link cards">
-          {this.state.prompts.map(({ title, prompt }) => (
-            <Prompt key={title} title={title} prompt={prompt} />
+          {this.state.prompts.map(({ title, prompt_name }) => (
+            <Prompt
+              key={title} 
+              title={title} 
+              prompt={prompt_name} 
+            />
           ))}
         </div>
       </div>
