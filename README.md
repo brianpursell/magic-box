@@ -1,8 +1,17 @@
-STEPS FOR SETUP
+======SUMMARY=====
+The application is split up by responsibility into multiple containers.
+The db container contains the database and its related files.
+The web container contains the client code & the server files.
+The remaining containers are meant for future expansion, based on a
+microservice architecture. These containers are not being used and can safely be deleted
+if you feel microservices are unnecessary. 
+The top level of the directory contains mainly configurations for docker-compose and AWS.
+
+=====STEPS FOR SETUP=====
 
 1. If docker is not installed, install it.
 2. Run docker-compose up --build in the root directory.
-3. Visit the app at localhost:8080! 
+3. Visit the app at localhost:8089! 
 
 
 =====FOR DEV=====

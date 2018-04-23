@@ -4,14 +4,11 @@ import { paths } from "./Routes.jsx";
 import "./styles.scss";
 
 class NavBar extends Component {
-  state = {
-    selectedRoute: paths.HOME
-  };
-
-  onClick = path => {
-    this.setState({ selectedRoute: path });
-  };
-
+  /**
+   * Reduces the path names from routes into
+   * a set of route buttons. Using their names,
+   * it finds its icon and creates the route.
+   */
   render = () => {
     return (
       <div className="ui sticky inverted vertical menu">
@@ -25,7 +22,6 @@ class NavBar extends Component {
         {Object.entries(paths).reduce((buttons, [name, route]) => {
           buttons.push(
             <NavButton
-              onClick={this.onClick.bind(this)}
               key={name}
               name={name}
               route={route}
@@ -38,7 +34,7 @@ class NavBar extends Component {
   };
 }
 
-const NavButton = ({ onClick, name, route }) => {
+const NavButton = ({ name, route }) => {
   const iconPath = `assets/${name.toLowerCase()}.svg`;
   return (
     <Link className="item" to={route}>

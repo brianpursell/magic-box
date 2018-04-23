@@ -15,6 +15,8 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+#Environment variables to be used by the 'pg' package to connect to our db
+#Note that docker will provide the ip when trying to connect to PGHOST (db)
 ENV PGHOST=db
 ENV PGUSER=postgres
 ENV PGDATABASE=eight_bit
