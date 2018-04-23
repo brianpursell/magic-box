@@ -5,6 +5,11 @@ services:
     image: "magic-box/web"
     ports:
       - "8089:8089"
+    expose: 
+      - "8089"
+    environment: 
+      - PROD=false
+      - PORT=8089
     depends_on:
       - db
   db:

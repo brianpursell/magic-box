@@ -1,8 +1,17 @@
-STEPS FOR SETUP
+======SUMMARY=====
+The application is split up by responsibility into multiple containers.
+The db container contains the database and its related files.
+The web container contains the client code & the server files.
+The remaining containers are meant for future expansion, based on a
+microservice architecture. These containers are not being used and can safely be deleted
+if you feel microservices are unnecessary. 
+The top level of the directory contains mainly configurations for docker-compose and AWS.
+
+=====STEPS FOR SETUP=====
 
 1. If docker is not installed, install it.
 2. Run docker-compose up --build in the root directory.
-3. Visit the app at localhost:8080! 
+3. Visit the app at localhost:8089! 
 
 
 =====FOR DEV=====
@@ -26,4 +35,8 @@ STEPS FOR SETUP
 10. Change the ports of the web service in the docker-compose.yml from 8089:8089 to 80:80
 11. Change the ecs-params.yml subnet IDs to the two subnets outputted by step 7, and the security group id to that of the output of step 8
 12. Run docker-compose up --build to build all images
-13. Run ecs-cli compose --file docker-compose.prod.yml --project-name magic-box service up  --create-log-groups
+13. Create an elastic container repository- https://console.aws.amazon.com/ecs/home?region=us-east-1#/repositories
+14. Follow the instructions of "view push commands" to set up the ability to push docker images
+15. Push all of your images up with tags of their names
+16. Change the image URLs in docker-compose.prod.yml
+17. Run ecs-cli compose --file docker-compose.prod.yml --project-name magic-box service up  --create-log-groups

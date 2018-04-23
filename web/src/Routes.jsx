@@ -20,6 +20,10 @@ class Routes extends Component {
 
   }
 
+  /**
+   * These are the routes for the application.
+   * Each main component for each route is imported.
+   */
   render = () => {
     return (
       <Switch>

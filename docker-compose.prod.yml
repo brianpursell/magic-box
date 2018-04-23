@@ -1,11 +1,17 @@
 version: "2"
 services:
   web:
-    image: "magic-box/web"
+    image: "{YOUR ACCOUNT NUMBER}.dkr.ecr.us-east-1.amazonaws.com/magic-box:web"
     ports:
       - "80:80"
     depends_on:
       - db
+    environment:
+      - PROD=true
+      - PORT=80
+      - PGHOST=0.0.0.0
+    expose: 
+      - "80"
     logging:
       driver: awslogs
       options: 
@@ -14,7 +20,7 @@ services:
         awslogs-stream-prefix: magic-box
   db:
     restart: "always"
-    image: "magic-box/db"
+    image: "{YOUR ACCOUNT NUMBER}.dkr.ecr.us-east-1.amazonaws.com/magic-box:db"
     ports:
       - "5432:5432"
     logging:
@@ -24,7 +30,7 @@ services:
         awslogs-region: us-east-1
         awslogs-stream-prefix: magic-box
   music:
-    image: "magic-box/music"
+    image: "{YOUR ACCOUNT NUMBER}.dkr.ecr.us-east-1.amazonaws.com/magic-box:music"
     ports: 
       - "8081:8081"
     logging:
@@ -34,7 +40,7 @@ services:
         awslogs-region: us-east-1
         awslogs-stream-prefix: magic-box
   prompts:
-    image: "magic-box/prompts"
+    image: "{YOUR ACCOUNT NUMBER}.dkr.ecr.us-east-1.amazonaws.com/magic-box:prompts"
     ports:
       - "8082:8082"
     logging:
@@ -44,7 +50,7 @@ services:
         awslogs-region: us-east-1
         awslogs-stream-prefix: magic-box
   sprites: 
-    image: "magic-box/sprites"
+    image: "{YOUR ACCOUNT NUMBER}.dkr.ecr.us-east-1.amazonaws.com/magic-box:sprites"
     ports: 
       - "8083:8083"
     logging:
@@ -54,7 +60,7 @@ services:
         awslogs-region: us-east-1
         awslogs-stream-prefix: magic-box
   worlds: 
-    image: "magic-box/worlds" 
+    image: "{YOUR ACCOUNT NUMBER}.dkr.ecr.us-east-1.amazonaws.com/magic-box:worlds" 
     ports: 
       - "8084:8084"
     logging:
